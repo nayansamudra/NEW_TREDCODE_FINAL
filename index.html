@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"> -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap_5.3.css">
+
+    <!-- jquery CDN-->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script> -->
+    <script src="js/jquery_3.6.3.js"></script>
+
+    <title>Tredcode</title>
+
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/aos.css">
+    <link rel="stylesheet" type="text/css" href="css/boxicons.min.css">
+    <link rel="stylesheet" type="text/css" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/icofont@1.0.0/dist/icofont.min.css" rel="stylesheet">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7771336524545257"
+     crossorigin="anonymous"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCHQ1VC2VL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-NCHQ1VC2VL');
+    </script>
+
+    <!-- <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script> -->
+    <script src="js/lottie_player.js"></script>
+
+    <link rel="icon" href="img/Tredcode_logo.png" sizes="32x32" />
+    <link rel="icon" href="img/Tredcode_logo.png" sizes="192x192" />
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- <script src="https://unpkg.com/jwt-decode/build/jwt-decode.js"></script> -->
+    <script src="js/jwt_decode.js"></script>
+
+    <script>
+        api_url = ""
+
+        function onSignIn(response) {
+            // console.log(response)
+            const responsePayload = jwt_decode(response.credential);
+
+            var email = responsePayload.email
+            console.log(response.credential)
+            console.log(response)
+            // return
+            cred = response.credential
+            JWT_cred = jwt_decode(cred)
+            Profile_Img = JWT_cred['picture']
+            // console.log("Email: " + profile.getEmail());
+
+            $.post(api_url + "/auth", { g_token: cred }, function (data, status) {
+                console.log("Data: " + data + "\nStatus: " + status);
+                if (data == "success") {
+                    window.location.replace("/home");
+                }
+
+                else {
+                    // alert("User not Authenticated, Please Contact us for Access")
+                    toastList.forEach(toast => toast.show());
+                    setTimeout(() => {
+                        toastList.forEach(toast => toast.hide());
+                    }, 3000);
+                    console.log("Error in authentication")
+                }
+            });
+        }
+    </script>
+
+    <style id="wp-custom-css">
+        .media-presence {
+            background: #ffffff;
+            padding: 40px 0 80px;
+        }
+
+        .logo-wrap {
+            background: #FFFFFF;
+            box-shadow: 5px 4px 28px rgba(112, 119, 133, 0.15);
+            border-radius: 15px;
+            padding: 40px 10px;
+            margin-bottom: 50px;
+        }
+
+        .logo-wrap ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-align: center;
+        }
+
+        .logo-wrap ul li {
+            display: inline-block;
+            width: 11%;
+            margin: 0 1%;
+        }
+
+        .logo-wrap ul li img {
+            width: 100%;
+        }
+
+        .header-head {
+            width: 100%;
+            padding: 50px 0;
+        }
+
+        .header-head h3 {
+            font-family: 'Outfit';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 36px;
+            line-height: 50px;
+            color: #181818;
+            text-transform: capitalize;
+        }
+
+        .video_main {
+            width: 100%;
+            text-align: center;
+            justify-content: center;
+            float: left;
+            display: inline-table;
+        }
+
+        .video_main .item {
+            width: 25%;
+            max-width: 25%;
+            display: inline-block;
+            padding: 12px 6px;
+        }
+
+        @media (max-width: 992px) {
+            .video_main .item {
+                width: 50%;
+                max-width: 50%;
+            }
+        }
+
+        .prevent-select {
+            -webkit-user-select: none;
+            /* Safari */
+            -ms-user-select: none;
+            /* IE 10 and IE 11 */
+            user-select: none;
+            /* Standard syntax */
+        }
+
+        /* Set the video as a background */
+        #video-bg {
+            top: 0;
+            left: 0;
+            z-index: -1;
+            height: auto;
+            width: 100%;
+        }
+
+        /* Hide the video controls */
+        #video-bg::-webkit-media-controls {
+            display: none !important;
+        }
+
+        #video-bg::-webkit-media-controls-enclosure {
+            display: none !important;
+        }
+
+        #video-bg::-webkit-media-controls-overlay-play-button {
+            display: none !important;
+        }
+    </style>
+
+    <style>
+        .toast.align-items-center.bg-danger,
+        .toast-header.bg-danger {
+            background-color: #ff8a8a !important;
+        }
+
+        .toast.align-items-center.bg-danger.text-danger,
+        .toast-header.bg-danger.text-danger {
+            color: #712525 !important;
+        }
+    </style>
+
+    <style>
+        @media (max-width:992px) {
+            #quotes_image {
+                width: 30% !important
+            }
+        }
+    </style>
+</head>
+
+<body style="font-family: 'Outfit', sans-serif;">
+
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+            <a href="#" class="logo mr-auto">
+                <img src="img/Tredlogo.png" alt="" class="img-fluid">
+            </a>
+            <nav class="nav-menu d-none d-lg-block">
+                <ul>
+                    <li class="active"><a href="#WhatOur">Testimonial</a></li>
+                    <li><a href="#services">Features</a></li>
+                </ul>
+            </nav>
+            <a href="https://tradingcafeindia.com/" class="get-started-btn scrollto">Home</a>
+        </div>
+    </header>
+    <button type="button" class="mobile-nav-toggle d-lg-none"><i class="icofont-navigation-menu"></i></button>
+    <nav class="mobile-nav d-lg-none">
+        <ul>
+            <li><a href="#WhatOur">Testimonial</a></li>
+            <li><a href="#services">Features</a></li>
+        </ul>
+    </nav>
+    <div class="mobile-nav-overly" style="display: none;"></div>
+
+    <section id="hero" class="hero d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 d-flex flex-column justify-content-center">
+                    <div class="form">
+                        <h1 data-aos="fade-up" class="aos-init aos-animate">Welcome Back!</h1>
+                        <h2 data-aos="fade-up" data-aos-delay="400" class="aos-init aos-animate"></h2>
+                        <div data-aos="fade-up" data-aos-delay="600" class="aos-init aos-animate">
+                            <div class="d-flex justify-content-center">
+
+                                <div id="g_id_onload"
+                                    data-client_id="256759331803-l4q84jqdcnhuu5aevgtee6v5l6v4oi8m.apps.googleusercontent.com"
+                                    data-callback="onSignIn"></div>
+                                <div class="g_id_signin" data-type="standard"></div>
+                            </div>
+
+                        </div>
+                        <div class="form-group new-member aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
+                        </div>
+                        <span id="new_user" style="color:red; cursor: pointer;"
+                            class="mt-3 d-flex justify-content-center">New User ? Register Now for Free ! </span>
+                    </div>
+                </div>
+                <div class="col-lg-7 hero-img aos-init aos-animate mx-auto" data-aos="zoom-out" data-aos-delay="200">
+                    <video id="video-bg" autoplay loop muted playsinline>
+                        <source src="img/motion-graphics.m4v" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container-fluid" id="About_Tredcode" style="background-color: rgb(14,14,14);">
+        <div class="py-3 container-xxl">
+            <div class="my-5 pt-5 heading text-center">
+                <span style="font-weight: bold;font-size:26px; color:white">Everything you need</span>
+            </div>
+            <div class="my-5 row py-5">
+                <div class="col-lg-6">
+                    <img src="img/Screenshot_30.png" width="100%" height="100%"
+                        style="box-shadow: 0 0 5px 5px rgb(14,14,14);" />
+                </div>
+                <div class="col-lg-6">
+                    <div class="ms-5 img_description_bold text-left" style="color:#5271ff">
+                        <span style="font-weight: bold">Money Flux</span>
+                    </div>
+                    <div class="my-3 ms-5 img_description text-left">
+                        <span style="font-weight: normal; color:white">See How Big Players Are Building Positions In
+                            Index. Best Tool To Have For Option Buying In Markets. With Money Flux You Will Get Candle
+                            By Candle Position Update Of All Market Participants. Money Flux Checks, Oi, Price Movement
+                            Of All Strikes, Bid-ask Ratio And Gives You A Clear Picture Of What Is Happening Behind The
+                            Candle.
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="py-5 my-5 row" id="second_row">
+                <div class="col-lg-6">
+                    <div class="me-5 img_description_bold text-left" style="color:#5271ff">
+                        <span style="font-weight: bold">Index Analysis</span>
+                    </div>
+                    <div class="my-3 me-5 img_description text-left">
+                        <span style="font-weight: normal;color:white">Now See Whether Major Players Are Building Bullish
+                            Or Bearish Positions In The Market And Analyse With The Custom Time Range Selector. If You
+                            Are Planning To Buy A Breakout But Not Sure Whether That Breakout Will Sustain Or Not, Then
+                            Index Analyzer Is For You. It Will Show You The Net Position Built In Index And Gives You
+                            Information About Who Is In Control, Are They Bullish Or Bearish.
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="img/Screenshot_29.png" width="100%" height="100%"
+                        style="box-shadow: 0 0 5px 5px rgb(14,14,14);" />
+                </div>
+            </div>
+            <div class="my-5 row py-5">
+                <div class="col-lg-6">
+                    <img src="img/Screenshot_28.png" width="100%" height="100%"
+                        style="box-shadow: 0 0 5px 5px rgb(14,14,14);" />
+                </div>
+                <div class="col-lg-6">
+                    <div class="ms-5 img_description_bold text-left" style="color:#5271ff">
+                        <span style="font-weight: bold">Swing Centre</span>
+                    </div>
+                    <div class="my-3 ms-5 img_description text-left">
+                        <span style="font-weight: normal;color:white">It Provides The Best Stocks Available To Add In
+                            Your Swing Baskets, & Gives Clear Idea About Current Money Flow Across The Different Market
+                            Segment. Stocks Which Are Breaking Important Support And Resistance With Momentum Will Be
+                            Filtered Here. A Must Have Tool If You Are Doing Swing Trading And Short-term Investing.
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="py-5 my-5 row" id="fourth_row">
+                <div class="col-lg-6">
+                    <div class="me-5 img_description_bold text-left" style="color:#5271ff">
+                        <span style="font-weight: bold">Pro Setups</span>
+                    </div>
+                    <div class="my-3 me-5 img_description text-left">
+                        <span style="font-weight: normal;color:white">Here Active Day Traders Will Find Most Suitable
+                            Trade Setups As Per Their Style Of Trading. Pro Setup Gives Variety Of Trades Starts From
+                            Highest Reversal Trade Opportunities, Momentum Trading, Loss Of Momentum Trading , Multiple
+                            Support/ Resistance Breakout And Much More Pro Setups To Trade In Intraday.
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="img/Screenshot_31.png" width="100%" height="100%"
+                        style="box-shadow: 0 0 5px 5px rgb(14,14,14);" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" id="About_Tredcode_Mobile_View" style="background-color: rgb(14,14,14);">
+        <div class="container-xxl">
+            <span class="prevent-select" style="color: rgb(14,14,14)">TCI-Tredcode</span>
+            <div class="mt-4 heading text-center">
+                <span style="font-weight: bold;font-size:26px; color:white">Everything you need</span>
+            </div>
+            <div class="my-5 row pb-5">
+                <div class="col-lg-6">
+                    <img src="img/Screenshot_30.png" width="100%" height="100%"
+                        style="  box-shadow: 0 0 5px 5px rgb(14,14,14);" />
+                </div>
+                <div class="col-lg-6">
+                    <div class="ms-5 img_description_bold text-left" style="color:#5271ff">
+                        <span style="font-weight: bold">Money Flux</span>
+                    </div>
+                    <div class="ms-5 img_description text-left">
+                        <span style="font-weight: normal; color:white">See How Big Players Are Building Positions In
+                            Index. Best Tool
+                            To
+                            Have For Option Buying In Markets. With Money Flux You Will Get Candle By Candle Position
+                            Update
+                            Of All Market Participants. Money Flux Checks, Oi, Price Movement Of All Strikes, Bid-ask
+                            Ratio
+                            And Gives You A Clear Picture Of What Is Happening Behind The Candle.
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="py-5 my-5 row" id="second_row">
+                <div class="col-lg-6">
+                    <img src="img/Screenshot_29.png" width="100%" height="100%"
+                        style=" box-shadow: 0 0 5px 5px rgb(14,14,14);" />
+                </div>
+                <div class="col-lg-6">
+                    <div class="me-5 img_description_bold text-left" style="color:#5271ff">
+                        <span style="font-weight: bold">Index Analysis</span>
+                    </div>
+                    <div class="me-5 img_description text-left">
+                        <span style="font-weight: normal; color:white">Now See Whether Major Players Are Building
+                            Bullish Or Bearish Positions In The Market And Analyse With The Custom Time Range Selector.
+                            If You Are Planning To Buy A Breakout But Not Sure Whether That Breakout Will Sustain Or
+                            Not, Then Index Analyzer Is For You. It Will Show You The Net Position Built In Index And
+                            Gives You Information About Who Is In Control, Are They Bullish Or Bearish.
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="my-5 row py-5">
+                <div class="col-lg-6">
+                    <img src="img/Screenshot_28.png" width="100%" height="100%"
+                        style=" box-shadow: 0 0 5px 5px rgb(14,14,14);" />
+                </div>
+                <div class="col-lg-6">
+                    <div class="ms-5 img_description_bold text-left" style="color:#5271ff">
+                        <span style="font-weight: bold">Swing Centre</span>
+                    </div>
+                    <div class="ms-5 img_description text-left">
+                        <span style="font-weight: normal; color:white">It Provides The Best Stocks Available To Add In
+                            Your Swing
+                            Baskets, & Gives Clear Idea About Current Money Flow Across The Different Market Segment.
+                            Stocks
+                            Which Are Breaking Important Support And Resistance Will Momentum Will Be Filtered Here. A
+                            Must
+                            Have Tool If You Are Doing Swing Trading And Short-term Investing.
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="py-5 my-5 row" id="second_row">
+                <div class="col-lg-6">
+                    <img src="img/Screenshot_31.png" width="100%" height="100%"
+                        style=" box-shadow: 0 0 5px 5px rgb(14,14,14);" />
+                </div>
+                <div class="col-lg-6">
+                    <div class="me-5 img_description_bold text-left" style="color:#5271ff">
+                        <span style="font-weight: bold">Pro Setups</span>
+                    </div>
+                    <div class="me-5 img_description text-left">
+                        <span style="font-weight: normal; color:white">Here Active Day Traders Will Find Most Suitable
+                            Trade Setups
+                            As
+                            Per Their Style Of Trading. Pro Setup Gives Variety Of Trades Starts From Highest Reversal
+                            Trade
+                            Opportunities, Momentum Trading, Loss Of Momentum Trading , Multiple Support/ Resistance
+                            Breakout And Much More Pro Setups To Trade In Intraday.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main id="main">
+
+        <section id="WhatOur" class="WhatOur">
+            <div class="container aos-init aos-animate" data-aos="fade-up">
+                <div class="row content">
+                    <div class="col-lg-3">
+                        <div class="whatsection-title">
+                            <h2 style="color:black"> What Our Users Say</h2>
+                            <p style="color:black">We are happy when our customers are happy</p>
+                        </div>
+                        <img src="img/left-icon.png" class="img-fluid" alt="" id="quotes_image">
+                    </div>
+                    <div class="col-lg-9 pt-4 pt-lg-0">
+                        <div class="owl-carousel testimonials-carousel owl-loaded owl-drag">
+                            <div class="owl-stage-outer">
+                                <div class="owl-stage"
+                                    style="transform: translate3d(-2130px, 0px, 0px); transition: all 0.25s ease 0s; width: 4260px;">
+                                    <div class="owl-item cloned" style="width: 335px; margin-right: 20px;">
+                                        <div class="testimonial-item aos-init aos-animate" data-aos="fade-up">
+                                            <img src="img/wasim.jpg" class="testimonial-img" alt="">
+                                            <div class="testimonial-header">
+                                                <p>“When it comes to finding the right opportunity at right time,
+                                                    TREDCODE is at top. I only take couple of trades in a day and I
+                                                    usually get good momentum stocks in Intraday boost and Get overall
+                                                    market flow under Sectoral view. Thanks TREDCODE for using data is a
+                                                    unique way to help to find good setups..”</p>
+                                            </div>
+                                            <div class="testimonial-footer">
+                                                <h3>Wasim Sheikh</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item cloned" style="width: 335px; margin-right: 20px;">
+                                        <div class="testimonial-item aos-init aos-animate" data-aos="fade-up">
+                                            <img src="img/nishant.jpg" class="testimonial-img" alt="">
+                                            <div class="testimonial-header">
+                                                <p>“As avid Index options trader , I need to find exactly where the flow
+                                                    is today. Tredcode has taken away all the manual work I used to do
+                                                    and on top that there advanced algos are working great in find next
+                                                    big movement on that day.”</p>
+                                            </div>
+                                            <div class="testimonial-footer">
+                                                <h3>Nishant Soni</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item cloned" style="width: 335px; margin-right: 20px;">
+                                        <div class="testimonial-item aos-init aos-animate" data-aos="fade-up">
+                                            <img src="img/gaurav.jpg" class="testimonial-img" alt="">
+                                            <div class="testimonial-header">
+                                                <p>“With TRECODE I am able to trade consistently as there advanced
+                                                    raking and filtration process gives the best momentum structures for
+                                                    trading. Now I am able to trade less but quality setups. More
+                                                    importantly, it helped to become a confident trader as wanted to be.
+                                                    ”</p>
+                                            </div>
+                                            <div class="testimonial-footer">
+                                                <h3>Gaurav Thakkar</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 335px; margin-right: 20px;">
+                                        <div class="testimonial-item aos-init aos-animate" data-aos="fade-up">
+                                            <img src="img/piyush.jpg" class="testimonial-img" alt="">
+                                            <div class="testimonial-header">
+                                                <p>“Tredcode has helped me to organize my trading overall. Now I can
+                                                    find momentum stocks in early morning and complete my trading by 11
+                                                    am. Kudos to TREDCODE team for developing such amazing tool.”</p>
+                                            </div>
+                                            <div class="testimonial-footer">
+                                                <h3>Piyush Khatri</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 335px; margin-right: 20px;">
+                                        <div class="testimonial-item aos-init aos-animate"
+                                            style="background-color:#e3f2ff;" data-aos="fade-up">
+                                            <img src="img/harish.jpg" class="testimonial-img" alt="">
+                                            <div class="testimonial-header">
+                                                <p>“It just amazing. I can get a clear view of entire market in 1 screen
+                                                    and able to get clear idea, where smart money is flowing. My swing
+                                                    trading has upgraded to next level after using TREDCODE..”</p>
+                                            </div>
+                                            <div class="testimonial-footer">
+                                                <h3>Harish Reddy</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 335px; margin-right: 20px;">
+                                        <div class="testimonial-item aos-init aos-animate"
+                                            style="background-color:#e3f2ff;" data-aos="fade-up">
+                                            <img src="img/shubham.jpg" class="testimonial-img" alt="">
+                                            <div class="testimonial-header">
+                                                <p>“For one year I was searching for holy grail, in process wiped out my
+                                                    capital 3 times, but when I started using TREDCODE , first time I
+                                                    realised u don't need to search for an opportunity, rather wait
+                                                    calmly to get perfect setup. My aim is simple and that is making
+                                                    3-4% a day and I'm done..”</p>
+                                            </div>
+                                            <div class="testimonial-footer">
+                                                <h3>Shubham Pal</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item active" style="width: 335px; margin-right: 20px;">
+                                        <div class="testimonial-item aos-init aos-animate" data-aos="fade-up">
+                                            <img src="img/wasim.jpg" class="testimonial-img" alt="">
+                                            <div class="testimonial-header">
+                                                <p>“When it comes to finding the right opportunity at right time,
+                                                    TREDCODE is at top. I only take couple of trades in a day and I
+                                                    usually get good momentum stocks in Intraday boost and Get overall
+                                                    market flow under Sectoral view. Thanks TREDCODE for using data is a
+                                                    unique way to help to find good setups..”</p>
+                                            </div>
+                                            <div class="testimonial-footer">
+                                                <h3>Wasim Sheikh</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item active" style="width: 335px; margin-right: 20px;">
+                                        <div class="testimonial-item aos-init aos-animate" data-aos="fade-up">
+                                            <img src="img/nishant.jpg" class="testimonial-img" alt="">
+                                            <div class="testimonial-header">
+                                                <p>“As avid Index options trader , I need to find exactly where the flow
+                                                    is today. Tredcode has taken away all the manual work I used to do
+                                                    and on top that there advanced algos are working great in find next
+                                                    big movement on that day.”</p>
+                                            </div>
+                                            <div class="testimonial-footer">
+                                                <h3>Nishant Soni</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 335px; margin-right: 20px;">
+                                        <div class="testimonial-item aos-init aos-animate" data-aos="fade-up">
+                                            <img src="img/gaurav.jpg" class="testimonial-img" alt="">
+                                            <div class="testimonial-header">
+                                                <p>“With TRECODE I am able to trade consistently as there advanced
+                                                    raking and filtration process gives the best momentum structures for
+                                                    trading. Now I am able to trade less but quality setups. More
+                                                    importantly, it helped to become a confident trader as wanted to be.
+                                                    ”</p>
+                                            </div>
+                                            <div class="testimonial-footer">
+                                                <h3>Gaurav Thakkar</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item cloned" style="width: 335px; margin-right: 20px;">
+                                        <div class="testimonial-item aos-init aos-animate" data-aos="fade-up">
+                                            <img src="img/piyush.jpg" class="testimonial-img" alt="">
+                                            <div class="testimonial-header">
+                                                <p>“Tredcode has helped me to organize my trading overall. Now I can
+                                                    find momentum stocks in early morning and complete my trading by 11
+                                                    am. Kudos to TREDCODE team for developing such amazing tool.”</p>
+                                            </div>
+                                            <div class="testimonial-footer">
+                                                <h3>Piyush Khatri</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item cloned" style="width: 335px; margin-right: 20px;">
+                                        <div class="testimonial-item aos-init aos-animate"
+                                            style="background-color:#e3f2ff;" data-aos="fade-up">
+                                            <img src="img/harish.jpg" class="testimonial-img" alt="">
+                                            <div class="testimonial-header">
+                                                <p>“It just amazing. I can get a clear view of entire market in 1 screen
+                                                    and able to get clear idea, where smart money is flowing. My swing
+                                                    trading has upgraded to next level after using TREDCODE..”</p>
+                                            </div>
+                                            <div class="testimonial-footer">
+                                                <h3>Harish Reddy</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item cloned" style="width: 335px; margin-right: 20px;">
+                                        <div class="testimonial-item aos-init aos-animate"
+                                            style="background-color:#e3f2ff;" data-aos="fade-up">
+                                            <img src="img/shubham.jpg" class="testimonial-img" alt="">
+                                            <div class="testimonial-header">
+                                                <p>“For one year I was searching for holy grail, in process wiped out my
+                                                    capital 3 times, but when I started using TREDCODE , first time I
+                                                    realised u don't need to search for an opportunity, rather wait
+                                                    calmly to get perfect setup. My aim is simple and that is making
+                                                    3-4% a day and I'm done..”</p>
+                                            </div>
+                                            <div class="testimonial-footer">
+                                                <h3>Shubham Pal</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="services section-bg">
+            <div class="container aos-init" data-aos="fade-up">
+                <div class="section-title">
+                    <h2>What We Provide</h2>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init" data-aos="zoom-in"
+                        data-aos-delay="100">
+                        <div class="icon-box iconbox-blue">
+                            <div class="icon">
+                                <img src="img/service1.png" class="testimonial-img" alt="">
+                            </div>
+                            <div class="service-content text-left">
+                                <h4><a href="">High Momentum Stocks</a></h4>
+                                <p>By Analysing Multiple Variables In Live Markets, It Will Help You To Find Best Stocks
+                                    In First 5 Mins As Soon As Market Opens. Generally, These Stocks Becomes Days
+                                    Highest Gainers Or Losers.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0 aos-init" data-aos="zoom-in"
+                        data-aos-delay="200">
+                        <div class="icon-box iconbox-orange ">
+                            <div class="icon">
+                                <img src="img/service2.png" class="testimonial-img" alt="">
+                            </div>
+                            <div class="service-content text-left">
+                                <h4><a href=""> Bird Eye View </a></h4>
+                                <p>A Quick Glance On Entire Market Looking At Which Sector Is Pulling Or Pushing The
+                                    Markets Up &amp; Down And Best Stocks Available To Trade In Those Sectors. .</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0 aos-init" data-aos="zoom-in"
+                        data-aos-delay="300">
+                        <div class="icon-box iconbox-pink">
+                            <div class="icon">
+                                <img src="img/service3.png" class="testimonial-img" alt="">
+                            </div>
+                            <div class="service-content text-left">
+                                <h4><a href="">R Factor</a></h4>
+                                <p>Relevant Factor Is A Game Changer, It Will Bring The Most Active Scripts Available
+                                    For The Day. R Factor Is Based On Statistical And Mathematical Model. It Points Out
+                                    Where Exactly The Big Players Are Trading, &amp; By Trading Those Scripts Provides
+                                    Higher Returns..
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 aos-init" data-aos="zoom-in"
+                        data-aos-delay="100">
+                        <div class="icon-box iconbox-yellow">
+                            <div class="icon">
+                                <img src="img/service4.png" class="testimonial-img" alt="">
+                            </div>
+                            <div class="service-content text-left">
+                                <h4><a href="">Pro Setup </a></h4>
+                                <p>Here Active Day Traders Will Find Most Suitable Trade Setups As Per Their Style Of
+                                    Trading. Pro Setup Gives Variety Of Trades Starts From Highest Reversal Trade
+                                    Opportunities To Pure Trend Trading With Strength..</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 aos-init" data-aos="zoom-in"
+                        data-aos-delay="200">
+                        <div class="icon-box iconbox-red">
+                            <div class="icon">
+                                <img src="img/service5.png" class="testimonial-img" alt="">
+                            </div>
+                            <div class="service-content text-left">
+                                <h4><a href=""> Swing Center </a></h4>
+                                <p>It Provides The Best Stocks Available To Add In Your Swing Baskets, And Provides
+                                    Absolute Stats In Weekly Performance In All Sectors Which Gives Clear Idea About
+                                    Current Money Flow Across The Market..</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 aos-init" data-aos="zoom-in"
+                        data-aos-delay="300">
+                        <div class="icon-box iconbox-teal">
+                            <div class="icon">
+                                <img src="img/service6.png" class="testimonial-img" alt="">
+                            </div>
+                            <div class="service-content text-left">
+                                <h4><a href="">Breakout Tracker</a></h4>
+                                <p>It Helps To Avoid False Breakout And Our 5 &amp; 10 Min Momentum Spikes Creates Best
+                                    Opportunities After Zone Breakout. It Works Likes Heart Beats Of The Markets. Catch
+                                    The Best Among Rest..</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="media-presence">
+            <div class="container-xxl">
+                <div class="container">
+                    <div class="row justify-content-center text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="col-lg-8 col-sm-8 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="header-head">
+                                <h3>Our Media Presence</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-lg-12 col-md-12 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="logo-wrap">
+                                <ul>
+                                    <li><a
+                                            href="https://www.outlookindia.com/website/story/outlook-spotlight-beginner-stock-market-traders-find-their-way-to-profitability-with-trading-cafe-india/395384">
+                                            <img src="img/logo-s1.png"></a>
+                                    </li>
+                                    <li><a
+                                            href="https://m.dailyhunt.in/news/india/english/clout+news-epaper-dhc9d1a4a4c05c48768e5ceb1997c3d6ff/indias+top+stock+market+community+trading+cafe+india+busts+the+myths+about+share+bazaar-newsid-dhc9d1a4a4c05c48768e5ceb1997c3d6ff_4858b6b01c8e11ecb6ffc63dce291935?s=a&amp;ss=pd">
+                                            <img src="img/logo-s2.png"></a>
+                                    </li>
+                                    <li><a
+                                            href="https://www.deccanherald.com/brandspot/pr-spot/trading-cafe-india-has-trained-over-1000-profitable-traders-with-their-winning-strategies-1033520.html">
+                                            <img src="img/logo-s3.png"></a>
+                                    </li>
+                                    <li><a
+                                            href="https://www.hindustantimes.com/brand-post/trading-cafe-india-unveiling-the-new-world-of-trading-101627476865827.html">
+                                            <img src="img/logo-s4.png"></a>
+                                    </li>
+                                    <li><a
+                                            href="https://www.business-standard.com/content/specials/making-trading-an-accessible-career-the-dream-of-pro-mentors-at-trading-cafe-india-121090600443_1.html">
+                                            <img src="img/logo-s5.png"></a>
+                                    </li>
+                                    <li><a
+                                            href="https://www.zeebiz.com/companies/news-trading-cafe-india-one-of-the-finest-retail-prop-trading-desks-of-the-country-165755">
+                                            <img src="img/logo-s6.png"></a>
+                                    </li>
+                                    <li><a
+                                            href="https://www.ibtimes.sg/trading-cafe-india-proves-attaining-financial-freedom-possible-through-stock-market-60323">
+                                            <img src="img/logo-s7.png"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div class="toast align-items-center bg-danger text-danger" id="toast-alert" role="alert" aria-live="assertive"
+            aria-atomic="true">
+            <div class="toast-header bg-danger text-danger" id="toast-alert-heading">
+                <strong class="me-auto" style="font-size: 16px;" id="Header_toast_message"><i
+                        class="fa-solid fa-circle-exclamation"></i>Warning</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="d-flex">
+                <div class="toast-body toast-body_1" style="font-weight: 400; font-size: 22px; padding: 0.5rem;">User
+                    not Authenticated, Please Contact us
+                    for Access
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer">
+        <div class="container d-md-flex py-3 justify-content-center">
+            <div class=" text-center text-md-left">
+                <div class="copyright">
+                    2023 © TredCode. All Rights Reserved
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top" style="display: inline;"><i class="ri-arrow-up-line"></i></a>
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script> -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript -->
+    <script src="js/aos.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/all.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/icofont@1.0.0/main.min.js"></script>
+
+    <!-- <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script> -->
+    <script src="js/boxicons.js"></script>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"
+        integrity="sha512-0QbL0ph8Tc8g5bLhfVzSqxe9GERORsKhIn1IrpxDAgUsbBGz/V7iSav2zzW325XGd1OMLdL4UiqRJj702IeqnQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script src="js/jquery.easing.min.js"></script>
+
+
+    <script src="js/index.js"></script>
+
+    <script>
+        $("body").on("keyup", function (e) {
+            if (e.which === 27) {
+                return false;
+            }
+        });
+        $(document).ready(function () {
+            const toastElList = document.querySelectorAll('#toast-alert')
+            const toastoptions = {
+                animation: true,
+                delay: 5000 // This is just an example, you can adjust the delay as needed
+            };
+            toastList = [...toastElList].map(toastEl => new bootstrap.Toast(toastEl, toastoptions))
+
+            var curr_url = window.location.href
+            if (curr_url.includes("https://tredcode.com")) { window.location.replace('https://tredcode.tradingcafeindia.com') }
+
+            $("#new_user").click(function () {
+                window.location.href = "/guest";
+            });
+
+            $('#close').click(function () {
+                $('.lightbox-column').empty()
+                $('.lightbox').hide()
+            })
+
+        })
+    </script>
+
+</body>
+
+</html>

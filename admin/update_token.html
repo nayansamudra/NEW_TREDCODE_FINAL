@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tredcode</title>
+    <!-- Bootstrap CSS -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"> -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap_5.3.css">
+
+    <!-- Manual CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/update_token.css">
+    <link rel="stylesheet" type="text/css" href="/css/header_backend.css">
+
+    <!-- ICONS -->
+    <link rel="icon" href="/img/Tredcode_logo.png" sizes="32x32" />
+    <link rel="icon" href="/img/Tredcode_logo.png" sizes="192x192" />
+
+    <!-- Font-Awesome -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <link rel="stylesheet" type="text/css" href="/css/all.min.css">
+
+    <!-- Datatable.css-->
+    <!-- <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/v/bs4/dt-1.11.3/r-2.2.9/datatables.min.css" /> -->
+    <link rel="stylesheet" type="text/css" href="/css/datatables.css">
+
+    <!-- Google Login -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- <script src="https://unpkg.com/jwt-decode/build/jwt-decode.js"></script> -->
+    <script src="/js/jwt_decode.js"></script>
+</head>
+
+<body>
+    <div class="pt-0 container-fluid page-body-wrapper" style="background-color:#0e0e0e;">
+        <nav class="sidebar sidebar-offcanvas" id="sidebar" style="transition:1s;position:fixed;width:60px"></nav>
+        <nav class="sidebar sidebar-offcanvas" id="sidebar2" style="visibility: hidden; width: 60px; display: none;">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="">
+                        <img src="/img/market_depth.png">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">
+                        <img src="/img/pro_setup.png">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">
+                        <img src="/img/sectorial_flow.png">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">
+                        <img src="/img/swing_center.png">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- main-panel start -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="mt-3 container-fluid">
+                    <div class="mx-0 row d-flex justify-content-center align-item-center">
+                        <div class="wrapper_2 d-flex justify-content-between align-item-center">
+                            <h3>Tredcode Admin Panel</h3>
+                            <h5><u>Sign Out</u></h5>
+                            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
+                                type="button" onclick="toggle_sidebar()">
+                                <i class="fa-solid fa-bars"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="notification"></div>
+
+                <div class="container-fluid">
+                    <div class="mx-0 row d-flex justify-content-center">
+                        <div class="wrapper">
+                            <div class="xsrf">
+                                <h2 class="required-field">xsrf</h2>
+                                <input type="text" spellcheck="false" id="xsrf_input">
+                            </div>
+                            <div class="csrf">
+                                <h2 class="required-field">csrf</h2>
+                                <input type="text" spellcheck="false" id="csrf_input">
+                            </div>
+                            <div class="text-center mt-3 Submit_Button">
+                                <button id="submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat_slide_wrapper">
+                    <div class="fixed_updates_window text-light bg-color">
+                        <div class="fixed_updates_window_head font-weight-bold">
+                            <div class="h-100 d-flex align-items-center">
+                                <div class="">Updates &nbsp;<i class="fa-solid fa-message"></i></div>
+                                <div class="ml-auto" onclick="toggle_updates_window(true)">X</div>
+                            </div>
+                        </div>
+                        <div class="fixed_updates_window_body">
+                        </div>
+                    </div>
+
+                    <div class="fixed_updates_btn shadow">
+                        <button class="bg-color text-light" id="updates_btn" onclick="toggle_updates_window()"><img
+                                src="/img/msg.png" width="25" height="25"></button>
+                    </div>
+
+                    <div class="top_arrow bg-color" onclick="$('html, body').animate({ scrollTop: 0 }, 'slow');">
+                        <i class="fa-solid fa-angles-up" style="color: #fff;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- main-panel ends -->
+    </div>
+
+    <footer style="color:#0e0e0e; user-select: none;">Tredcode Backend</footer>
+
+    <!-- Jquery CDN -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script src="/js/jquery_3.7.0.js"></script>
+
+    <!-- Bootstrap bundle -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+            crossorigin="anonymous"></script> -->
+    <script src="/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Moment.js -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+            integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script src="/js/moment.min.js"></script>
+
+    <!-- Datatable.js -->
+    <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.3/r-2.2.9/datatables.min.js"></script> -->
+    <script src="/js/datatables.min.js"></script>
+
+    <!-- Font Awesome -->
+    <script src="/js/all.min.js"></script>
+
+    <!-- Manual Jquery -->
+    <script src="/js/gg.min.js"></script>
+    <script src="/js/vertical_navbar_backend.js"></script>
+    <script src="/js/update_token.js"></script>
+</body>
+
+</html>

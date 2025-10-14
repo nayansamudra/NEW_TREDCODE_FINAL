@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Pro Setup | Tredcode</title>
+   <!-- Bootstrap CSS -->
+   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"> -->
+   <link rel="stylesheet" type="text/css" href="css/bootstrap_5.3.css">
+
+   <!-- Manual CSS -->
+   <link rel="stylesheet" type="text/css" href="css/header.css">
+   <link rel="stylesheet" type="text/css" href="css/pro_setup.css">
+   <link rel="stylesheet" type="text/css" href="css/apexchart.css">
+
+   <!-- ICONS -->
+   <link rel="icon" href="img/Tredcode_logo.png" sizes="32x32" />
+   <link rel="icon" href="img/Tredcode_logo.png" sizes="192x192" />
+
+   <!-- Font-Awesome -->
+   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+   <link rel="stylesheet" type="text/css" href="css/all.min.css">
+
+   <!-- Data Table -->
+   <!-- <link rel="stylesheet" href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" /> -->
+   <link rel="stylesheet" type="text/css" href="css/datatables.css" />
+</head>
+
+<body>
+   <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+         <a class="navbar-brand brand-logo mx-2" href="/home"><img src="img/Tredcode_logo.png" alt="logo" /> </a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+         <span id="page_heading" class="text-light h3 m-auto">PRO SETUP</span>
+         <ul class="nifty navbar-nav navbar-nav-right py-3 px-2" id="nifty_block_head">
+            <li class="text px-1"><span id="swingname1">NIFTY</span></li>
+            <li class="amount px-1 text-light"><span id="swingamount1">-</span></li>
+            <li class="border-radius-25 green-light-bg per px-2"><span id="swingper1">-%</span></li>
+
+         </ul>
+         <ul class="nifty navbar-nav navbar-nav-right py-3 px-2 ml-0" id="bnknifty_block_head">
+            <li class="text px-1"><span id="swingname2">BANKNIFTY</span></li>
+            <li class="amount px-1 text-light"><span id="swingamount2">-</span></li>
+            <li class="border-radius-25 pink-light-bg per px-2"><span id="swingper2">-%</span></li>
+         </ul>
+         <ul class="navbar-nav navbar-nav-right ml-0">
+            <li class="nav-item nav-profile dropdown" onclick="showLogout()">
+               <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
+                  id="profileDropdown">
+                  <img src="img/usericon.png" alt="profile" /> <span id="uname"></span>
+                  <i class="fa-solid fa-caret-down"></i>
+               </a>
+               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" id="Logout_button"
+                  aria-labelledby="profileDropdown">
+                  <a class="dropdown-item" href="javascript:void(0)">
+                     <i class="fa-solid fa-power-off"></i>
+                     Logout
+                  </a>
+               </div>
+            </li>
+         </ul>
+         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+            onclick="toggle_sidebar()">
+            <i class="fa-solid fa-bars"></i>
+         </button>
+      </div>
+   </nav>
+
+   <div id="notification">Dhan Access is not activated</div>
+
+   <div class="container-fluid page-body-wrapper" style="background-color:#0e0e0e;">
+      <nav class="sidebar sidebar-offcanvas" id="sidebar" style="transition:1s;position:fixed;width:60px"></nav>
+      <nav class="sidebar sidebar-offcanvas" id="sidebar2" style="visibility: hidden; width: 60px; display: none;">
+         <ul class="nav">
+            <li class="nav-item">
+               <a class="nav-link" href="">
+                  <img src="img/market_depth.png">
+               </a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="">
+                  <img src="img/pro_setup.png">
+               </a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="">
+                  <img src="img/sectorial_flow.png">
+               </a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="">
+                  <img src="img/swing_center.png">
+               </a>
+            </li>
+         </ul>
+      </nav>
+      <!-- main-panel start -->
+      <div class="main-panel">
+         <div class="content-wrapper">
+            <div class="row mb-3 d-flex justify-content-center" id="show_hide">
+               <div class="col col-md-3 ps-0 my-3 text-light d-flex justify-content-center align-items-center">
+                  <input type="datetime-local" id="select_date_time" name="select_date_time"
+                     style="width: fit-content;">
+               </div>
+               <div class="col-2 col-md-1 ps-0 my-3 text-light d-flex justify-content-center align-items-center">
+                  <button class="go_btn bg-color text-white font-weight-bold w-100 h-100 rounded" id="Submit"
+                     type="button" onclick="fetch_data()">GO</button>
+               </div>
+               <div class="col-2 col-md-1 ps-0 my-3 text-light d-flex justify-content-center align-items-center">
+                  <button class="go_btn bg-color text-white font-weight-bold w-100 h-100 rounded" id="Hide"
+                     type="button" onclick="$('#show_hide').addClass('d-none')">HIDE</button>
+               </div>
+            </div>
+
+            <div class="row d-flex justify-content-center">
+               <div class="col-md-12 grid-margin stretch-card p-0-mob">
+                  <div class="card rounded">
+                     <div class="card-head" style="margin-bottom: 0;">
+                        <div class="row">
+                           <div class="col-md-8 text-light font-weight-bold">
+                              <h4>
+                                 5 Minute MOMENTUM SPIKE<a class="live"><i
+                                       class="fa-solid fa-circle fa-sm"></i>&nbsp;ACTIVE</a>
+                              </h4>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="card-body barchart-percentage-wrap">
+                        <div id="prosetup_1_barchart"> </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+               <div class="col-md-12 grid-margin stretch-card p-0-mob">
+                  <div class="card rounded">
+                     <div class="card-head" style="margin-bottom: 0;">
+                        <div class="row">
+                           <div class="col-md-8 text-light font-weight-bold">
+                              <h4>
+                                 10 Minute MOMENTUM SPIKE<a class="live"><i
+                                       class="fa-solid fa-circle fa-sm"></i>&nbsp;ACTIVE</a>
+                              </h4>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="card-body barchart-percentage-wrap">
+                        <div id="prosetup_2_barchart"> </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- row 1 -->
+            <div class="row d-flex justify-content-center">
+               <div class="col-md-6 bg-color text-light grid-margin mx-3 rounded pb-4">
+                  <div class="row m-3 px-3 d-flex align-items-center heading_font_size_row">
+                     <div class="col-8 px-1 font-weight-bold heading_font_size">
+                        DOWNSIDE LOM INTRA<a class="live"><i class="fa-solid fa-circle fa-sm"></i>&nbsp;ACTIVE</a>
+                     </div>
+                     <div class="col-4 px-1 text-light">
+                        <input id="prosetup_1_downsidelomintra_ip" class="float-right new_input"
+                           placeholder="Search Stock">
+                     </div>
+                  </div>
+                  <table id="prosetup_1_downsidelomintra" class="new_table table-striped table-borderless dataTablePs">
+                     <thead>
+                        <tr>
+                           <th>Symbol</th>
+                           <th>%</th>
+                           <th>Price</th>
+                           <th>Volume </th>
+                           <th>Date-Time</th>
+                        </tr>
+                     </thead>
+                     <tbody></tbody>
+                  </table>
+               </div>
+               <div class="col-md-6 bg-color text-light grid-margin mx-3 rounded pb-4">
+                  <div class="row m-3 px-3 d-flex align-items-center heading_font_size_row">
+                     <div class="col-8 px-1 font-weight-bold heading_font_size">
+                        UPSIDE LOM INTRA <a class="live"><i class="fa-solid fa-circle fa-sm"></i>&nbsp;ACTIVE</a>
+                     </div>
+                     <div class="col-4 px-1 text-light">
+                        <input id="prosetup_2_upsidelomintra_ip" class="float-right new_input"
+                           placeholder="Search Stock">
+                     </div>
+                  </div>
+                  <table id="prosetup_2_upsidelomintra" class="new_table table-striped table-borderless dataTablePs">
+                     <thead>
+                        <tr>
+                           <th>Symbol</th>
+                           <th>%</th>
+                           <th>Price</th>
+                           <th>Volume </th>
+                           <th>Date-Time</th>
+                        </tr>
+                     </thead>
+                     <tbody></tbody>
+                  </table>
+               </div>
+            </div>
+            <!-- row 2 -->
+            <div class="row d-flex justify-content-center">
+               <div class="col-md-6 bg-color text-light grid-margin mx-3 rounded pb-4">
+                  <div class="row m-3 px-3 d-flex align-items-center heading_font_size_row">
+                     <div class="col-8 px-1 font-weight-bold heading_font_size">
+                        DOWNSIDE LOM SWING<a class="live"><i class="fa-solid fa-circle fa-sm"></i>&nbsp;ACTIVE</a>
+                     </div>
+
+                     <div class="col-4 px-1 text-light">
+                        <input id="prosetup_3_downsidelomswing_ip" class="float-right new_input"
+                           placeholder="Search Stock">
+                     </div>
+                  </div>
+                  <table id="prosetup_3_downsidelomswing" class="new_table table-striped table-borderless dataTablePs">
+                     <thead>
+                        <tr>
+                           <th>Symbol</th>
+                           <th>%</th>
+                           <th>Price</th>
+                           <th>Volume </th>
+                           <th>Date-Time</th>
+                        </tr>
+                     </thead>
+                     <tbody></tbody>
+                  </table>
+               </div>
+               <div class="col-md-6 bg-color text-light grid-margin mx-3 rounded pb-4">
+                  <div class="row m-3 px-3 d-flex align-items-center heading_font_size_row">
+                     <div class="col-8 px-1 font-weight-bold heading_font_size">
+                        UPSIDE LOM SWING<a class="live"><i class="fa-solid fa-circle fa-sm"></i>&nbsp;ACTIVE</a>
+                     </div>
+
+                     <div class="col-4 px-1 text-light">
+                        <input id="prosetup_4_upsidelomswing_ip" class="float-right new_input"
+                           placeholder="Search Stock">
+                     </div>
+                  </div>
+                  <table id="prosetup_4_upsidelomswing" class="new_table table-striped table-borderless dataTablePs">
+                     <thead>
+                        <tr>
+                           <th>Symbol</th>
+                           <th>%</th>
+                           <th>Price</th>
+                           <th>Volume </th>
+                           <th>Date-Time</th>
+                        </tr>
+                     </thead>
+                     <tbody></tbody>
+                  </table>
+               </div>
+            </div>
+            <!-- row 3 -->
+            <div class="row d-flex justify-content-center">
+               <div class="col-md-6 bg-color text-light grid-margin mx-3 rounded pb-4">
+                  <div class="row m-3 px-3 d-flex align-items-center heading_font_size_row">
+                     <div class="col-8 px-1 font-weight-bold heading_font_size">
+                        MULTI RESISTANCE BO<a class="live"><i class="fa-solid fa-circle fa-sm"></i>&nbsp;ACTIVE</a>
+                     </div>
+
+                     <div class="col-4 px-1 text-light">
+                        <input id="prosetup_5_multiresistancebo_ip" class="float-right new_input"
+                           placeholder="Search Stock">
+                     </div>
+                  </div>
+                  <table id="prosetup_5_multiresistancebo" class="new_table table-striped table-borderless dataTablePs">
+                     <thead>
+                        <tr>
+                           <th>Symbol</th>
+                           <th>%</th>
+                           <th>Price</th>
+                           <th>Volume </th>
+                           <th>Date-Time</th>
+                        </tr>
+                     </thead>
+                     <tbody></tbody>
+                  </table>
+               </div>
+               <div class="col-md-6 bg-color text-light grid-margin mx-3 rounded pb-4">
+                  <div class="row m-3 px-3 d-flex align-items-center heading_font_size_row">
+                     <div class="col-8 px-1 font-weight-bold heading_font_size">
+                        MULTI SUPPORT BO<a class="live"><i class="fa-solid fa-circle fa-sm"></i>&nbsp;ACTIVE</a>
+                     </div>
+
+                     <div class="col-4 px-1 text-light">
+                        <input id="prosetup_6_multisupportbo_ip" class="float-right new_input"
+                           placeholder="Search Stock">
+                     </div>
+                  </div>
+                  <table id="prosetup_6_multisupportbo" class="new_table table-striped table-borderless dataTablePs">
+                     <thead>
+                        <tr>
+                           <th>Symbol</th>
+                           <th>%</th>
+                           <th>Price</th>
+                           <th>Volume </th>
+                           <th>Date-Time</th>
+                        </tr>
+                     </thead>
+                     <tbody></tbody>
+                  </table>
+               </div>
+            </div>
+            <!-- row 4 -->
+            <div class="row d-flex justify-content-center">
+               <div class="col-md-6 bg-color text-light grid-margin mx-3 rounded pb-4">
+                  <div class="row m-3 px-3 d-flex align-items-center heading_font_size_row">
+                     <div class="col-8 px-1 font-weight-bold heading_font_size">
+                        NEAR PREV. DAY'S HIGH<a class="live"><i class="fa-solid fa-circle fa-sm"></i>&nbsp;ACTIVE</a>
+                     </div>
+
+                     <div class="col-4 px-1 text-light">
+                        <input id="prosetup_7_multiresistancebo_eod_ip" class="float-right new_input"
+                           placeholder="Search Stock">
+                     </div>
+                  </div>
+                  <table id="prosetup_7_multiresistancebo_eod"
+                     class="new_table table-striped table-borderless dataTablePs">
+                     <thead>
+                        <tr>
+                           <th>Symbol</th>
+                           <th>%</th>
+                           <th>Price</th>
+                           <th>Volume </th>
+                           <th>Date-Time</th>
+                        </tr>
+                     </thead>
+                     <tbody></tbody>
+                  </table>
+               </div>
+               <div class="col-md-6 bg-color text-light grid-margin mx-3 rounded pb-4">
+                  <div class="row m-3 px-3 d-flex align-items-center heading_font_size_row">
+                     <div class="col-8 px-1 font-weight-bold heading_font_size">
+                        NEAR PREV. DAY'S LOW<a class="live"><i class="fa-solid fa-circle fa-sm"></i>&nbsp;ACTIVE</a>
+                     </div>
+                  
+                     <div class="col-4 px-1 text-light">
+                        <input id="prosetup_8_multisupportbo_eod_ip" class="float-right new_input"
+                           placeholder="Search Stock">
+                     </div>
+                  </div>
+                  <table id="prosetup_8_multisupportbo_eod"
+                     class="new_table table-striped table-borderless dataTablePs">
+                     <thead>
+                        <tr>
+                           <th>Symbol</th>
+                           <th>%</th>
+                           <th>Price</th>
+                           <th>Volume </th>
+                           <th>Date-Time</th>
+                        </tr>
+                     </thead>
+                     <tbody></tbody>
+                  </table>
+               </div>
+            </div>
+            <!-- row 5 -->
+            <div class="row d-flex justify-content-center">
+               <div class="col-md-6 bg-color text-light grid-margin mx-3 rounded pb-4">
+                  <div class="row m-3 px-3 d-flex align-items-center heading_font_size_row">
+                     <div class="col-8 px-1 font-weight-bold heading_font_size">
+                        DAILY CONTRACTION<a class="live"><i class="fa-solid fa-circle fa-sm"></i>&nbsp;ACTIVE</a>
+                     </div>
+                  
+                     <div class="col-4 px-1 text-light">
+                        <input id="prosetup_9_dailycontraction_ip" class="float-right new_input"
+                           placeholder="Search Stock">
+                     </div>
+                  </div>
+                  <table id="prosetup_9_dailycontraction" class="new_table table-striped table-borderless dataTablePs">
+                     <thead>
+                        <tr>
+                           <th>Symbol</th>
+                           <th>%</th>
+                           <th>Price</th>
+                           <th>Volume </th>
+                           <th>Date-Time</th>
+                        </tr>
+                     </thead>
+                     <tbody></tbody>
+                  </table>
+               </div>
+               <div class="col-md-6 bg-color text-light grid-margin mx-3 rounded pb-4">
+                  <div class="row m-3 px-3 d-flex align-items-center heading_font_size_row">
+                     <div class="col-6 px-1 font-weight-bold heading_font_size">
+                        PRE MARKET <a class="live"><i class="fa-solid fa-circle fa-sm"></i>&nbsp;ACTIVE</a>
+                     </div>
+                     <div class="col-3 px-1 text-right">
+                        <select class="rounded bg-faint" onchange="pre_mkt_change(this.value)" style="width:100%">
+                           <option value="Nifty">NIFTY</option>
+                           <option value="Fo">FO</option>
+                        </select>
+                     </div>
+                     <div class="col px-1 text-light">
+                        <input id="prosetup_10_premarket_ip" class="float-right new_input" placeholder="Search Stock">
+                     </div>
+                  </div>
+                  <table id="prosetup_10_premarket" class="new_table table-striped table-borderless dataTablePs">
+                     <thead>
+                        <tr>
+                           <th>Symbol</th>
+                           <th>%</th>
+                           <th>Price</th>
+                           <th>Pre Acti. </th>
+                           <th>Date-Time</th>
+                        </tr>
+                     </thead>
+                     <tbody></tbody>
+                  </table>
+               </div>
+            </div>
+
+            <div class="chat_slide_wrapper">
+               <div class="fixed_updates_window text-light bg-color">
+                  <div class="fixed_updates_window_head font-weight-bold">
+                     <div class="h-100 d-flex align-items-center">
+                        <div class="">Updates &nbsp;<i class="fa-solid fa-message"></i></div>
+                        <div class="ml-auto" onclick="toggle_updates_window(true)">X</div>
+                     </div>
+                  </div>
+                  <div class="fixed_updates_window_body"></div>
+               </div>
+
+               <div class="fixed_updates_btn shadow">
+                  <button class="bg-color text-light" id="updates_btn" onclick="toggle_updates_window()"><img
+                        src="img/msg.png" width="25" height="25"></button>
+               </div>
+
+               <div class="top_arrow bg-color" onclick="$('html, body').animate({ scrollTop: 0 }, 'slow');">
+                  <i class="fa-solid fa-angles-up" style="color: #fff;"></i>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- main-panel ends -->
+   </div>
+
+   <footer class="footer">
+      <div class="row">
+         <div class="col-md-12">
+            2023 © TredCode. All Rights Reserved
+         </div>
+         <div class="col-12 font-weight-bold mt-1">
+            <a href="/disclaimer">Our Terms and Conditions</a>
+         </div>
+      </div>
+   </footer>
+
+   <!-- Google tag (gtag.js) -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCHQ1VC2VL"></script>
+   <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+
+      gtag('config', 'G-NCHQ1VC2VL');
+   </script>
+
+   <!-- Jquery CDN -->
+   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+   <script src="js/jquery_3.7.0.js"></script>
+
+   <!-- Bootstrap bundle -->
+   <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+               integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+               crossorigin="anonymous"></script> -->
+   <script src="js/bootstrap.bundle.min.js"></script>
+
+   <!-- Apexchart -->
+   <!-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> -->
+   <script src="js/apexcharts.js"></script>
+
+   <!-- DataTable -->
+   <!-- <script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script> -->
+   <script src="js/datatables.min.js"></script>
+
+   <!-- JWT Decode-->
+   <!-- <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script> -->
+   <script src="js/jwt_decode.js"></script>
+
+   <!-- Moment.JS -->
+   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script> -->
+   <script src="js/moment.min.js"></script>
+
+   <!-- Font Awesome -->
+   <script src="js/all.min.js"></script>
+
+   <!-- Manual Jquery -->
+   <script src="js/gg.min.js"></script>
+   <script src="js/vertical_navbar_js.js"></script>
+   <script src="js/pro_setup_hist.js"></script>
+</body>
+
+</html>

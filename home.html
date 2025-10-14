@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Home | Tredcode</title>
+   <!-- Bootstrap CSS -->
+   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"> -->
+   <link rel="stylesheet" type="text/css" href="css/bootstrap_5.3.css">
+
+   <!-- Manual CSS -->
+   <link rel="stylesheet" type="text/css" href="css/home.css">
+   <link rel="stylesheet" type="text/css" href="css/header.css">
+
+   <!-- ICONS -->
+   <link rel="icon" href="img/Tredcode_logo.png" sizes="32x32" />
+   <link rel="icon" href="img/Tredcode_logo.png" sizes="192x192" />
+
+   <!-- Font-Awesome -->
+   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+   <link rel="stylesheet" type="text/css" href="css/all.min.css">
+</head>
+
+<body>
+   <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+         <a class="navbar-brand brand-logo mx-2" href="/home"><img src="img/Tredcode_logo.png" alt="logo" /> </a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+         <span id="page_heading" class="text-light h3 m-auto">HOME</span>
+         <ul class="nifty navbar-nav navbar-nav-right py-3 px-2" id="nifty_block_head">
+            <li class="text px-1"><span id="swingname1">NIFTY</span></li>
+            <li class="amount px-1 text-light"><span id="swingamount1">-</span></li>
+            <li class="border-radius-25 green-light-bg per px-2"><span id="swingper1">-%</span></li>
+         </ul>
+         <ul class="nifty navbar-nav navbar-nav-right py-3 px-2 ml-0" id="bnknifty_block_head">
+            <li class="text px-1"><span id="swingname2">BANKNIFTY</span></li>
+            <li class="amount px-1 text-light"><span id="swingamount2">-</span></li>
+            <li class="border-radius-25 pink-light-bg per px-2"><span id="swingper2">-%</span></li>
+         </ul>
+         <ul class="navbar-nav navbar-nav-right ml-0">
+            <li class="nav-item nav-profile dropdown" onclick="showLogout()">
+               <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
+                  id="profileDropdown">
+                  <img src="img/usericon.png" alt="profile" /> <span id="uname"></span>
+                  <i class="fa-solid fa-caret-down"></i>
+               </a>
+               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" id="Logout_button"
+                  aria-labelledby="profileDropdown">
+                  <a class="dropdown-item" href="javascript:void(0)">
+                     <i class="fa-solid fa-power-off"></i>
+                     Logout
+                  </a>
+               </div>
+            </li>
+         </ul>
+         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+            onclick="toggle_sidebar()">
+            <i class="fa-solid fa-bars"></i>
+         </button>
+      </div>
+   </nav>
+
+   <div id="notification">Dhan Access is not activated</div>
+
+   <div class="container-fluid page-body-wrapper" style="background-color:#0e0e0e;">
+      <nav class="sidebar sidebar-offcanvas" id="sidebar" style="transition:1s;position:fixed;width:60px"></nav>
+      <nav class="sidebar sidebar-offcanvas" id="sidebar2" style="visibility: hidden; width: 60px; display: none;">
+         <ul class="nav">
+            <li class="nav-item">
+               <a class="nav-link" href="">
+                  <img src="img/market_depth.png">
+               </a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="">
+                  <img src="img/pro_setup.png">
+               </a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="">
+                  <img src="img/sectorial_flow.png">
+               </a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="">
+                  <img src="img/swing_center.png">
+               </a>
+            </li>
+         </ul>
+      </nav>
+      <!-- main-panel starts -->
+      <div class="main-panel">
+         <div class="content-wrapper">
+
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="text-center bg-color1 border-radius-10">
+                     <div class="swing-heading">
+                        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3305687149330379"
+                           data-ad-slot="9230489380" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                        <script>
+                           (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="bg-color border-radius-10 ">
+                     <div class="swing-heading">TredCode Dashboard
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="container-fluid">
+               <div class="mb-4 row d-flex justify-content-center">
+                  <div class="activePlan bg-color text-center col-md-4 col-md col-lg p-4 m-2 rounded"
+                     style="cursor:pointer;" onclick="location.href='/tradefinder'">
+                     <h4 class="" style="color: #F6E18A;">
+                        <img src="img/TG.png" width="50px" style="padding-right: 5px;">
+                        <span>Trade with TradeFinder</span>
+                     </h4>
+                  </div>
+               </div>
+               <div class="row d-flex justify-content-center">
+                  <div class="bg-color text-center col-md-3 col-md col-lg p-4 m-2 rounded" style="cursor:pointer"
+                     onclick="location.href='/market-depth'">
+                     <h4 class="text-light">
+                        <i class="ti-panel px-1 text-light"></i>
+                        <img src="img/market_depth.png">
+                        Market Depth
+                     </h4>
+                  </div>
+                  <div class="bg-color text-center col-md-3 col-md col-lg p-4 m-2 rounded" style="cursor:pointer"
+                     onclick="location.href='/pro-setups'">
+                     <h4 class="text-light">
+                        <i class="ti-bar-chart px-1 text-light"></i>
+                        <img src="img/pro_setup.png">
+                        Pro Setups
+                     </h4>
+                  </div>
+                  <div class="bg-color text-center col-md-3 col-md col-lg p-4 m-2 rounded" style="cursor:pointer"
+                     onclick="location.href='/sectorial-flow'">
+                     <h4 class="text-light">
+                        <i class="ti-view-list px-1 text-light"></i>
+                        <img src="img/sectorial_flow.png">
+                        Sectorial Flow
+                     </h4>
+                  </div>
+                  <div class="bg-color text-center col-md-3 col-md col-lg p-4 m-2 rounded" style="cursor:pointer"
+                     onclick="location.href='/swing-center'">
+                     <h4 class="text-light">
+                        <i class="ti-pie-chart px-1 text-light"></i>
+                        <img src="img/swing_center.png">
+                        Swing Center
+                     </h4>
+                  </div>
+               </div>
+               <div class="row d-flex justify-content-center">
+                  <div class="bg-color text-center col-md-6 col-md col-lg p-4 m-2 rounded" style="cursor:pointer"
+                     onclick="location.href='/index-analysis'">
+                     <h4 class="text-light">
+                        <img src="img/index_analysis.png" width="40px" style="padding-right: 5px;">Index Analysis
+                     </h4>
+                  </div>
+                  <div class="bg-color text-center col-md-6 col-md col-lg p-4 m-2 rounded" style="cursor:pointer"
+                     onclick="location.href='/money-flux'">
+                     <h4 class="text-light">
+                        <img src="img/moneyflux.png" width="50px" style="padding-right: 5px;">Money-Flux
+                     </h4>
+                  </div>
+               </div>
+               <div class="row d-flex justify-content-center">
+                  <div class="bg-color text-center col-md-6 col-md col-lg p-4 m-2 rounded delivery_scanner"
+                     style="cursor:pointer">
+                     <h4 class="text-light">
+                        <img src="img/scanner.png" width="50px" style="padding-right: 5px;">Delivery Scanners
+                     </h4>
+                  </div>
+                  <div class="bg-color text-center col-md-6 col-md col-lg p-4 m-2 rounded fii_dii_data"
+                     style="cursor:pointer">
+                     <h4 class="text-light">
+                        <img src="img/fii_dii_data.png" width="50px" style="padding-right: 5px;">FII / DII
+                     </h4>
+                  </div>
+               </div>
+               <div class="row d-flex justify-content-center">
+                  <div class="bg-color text-center col-md-6 col-md col-lg p-4 m-2 rounded trading_journal"
+                     style="cursor:pointer">
+                     <h4 class="text-light">
+                        <img src="img/trading_journal.png" width="50px" style="padding-right: 5px;">Trading Journal
+                     </h4>
+                  </div>
+                  <div class="bg-color text-center col-md-6 col-md col-lg p-4 m-2 rounded" style="cursor:pointer"
+                     onclick="location.href='/feedback'">
+                     <h4 class="text-light">
+                        <img src="img/feedback.png" width="50px" style="padding-right: 5px;">Help Us To Grow
+                     </h4>
+                  </div>
+               </div>
+               <div id="myDiv" style="display: none;">
+                  <div class="row d-flex justify-content-center">
+                     <div class="bg-color text-center col-md-4 col-md col-lg p-4 m-2 rounded"
+                        style="cursor:pointer;border-style:solid;border-color: #FFDE59;"
+                        onclick="location.href='/trade-with-tredcode'">
+                        <h4 class="text-light">
+                           <img src="img/trade_with_tredcode.png" style="padding-right: 5px;">Trade
+                           with Tredcode
+                        </h4>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="p-2 h-100 mx-3 px-0 text-light button_height">
+                  <button class="go_btn bg-color text-white font-weight-bold px-4 py-2 rounded" type="button"
+                     data-bs-toggle="modal" data-bs-target="#exampleModal1">Disclaimer</button>
+               </div>
+            </div>
+
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="text-center bg-color1 border-radius-10">
+                     <div class="swing-heading">
+                        <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed"
+                           data-ad-client="ca-pub-6938710509021107" data-ad-slot="1655501713"></ins>
+                        <script>
+                           (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="chat_slide_wrapper">
+               <div class="fixed_updates_window text-light bg-color">
+                  <div class="fixed_updates_window_head font-weight-bold">
+                     <div class="h-100 d-flex align-items-center">
+                        <div class="">Updates &nbsp;<i class="fa-solid fa-message"></i></div>
+                        <div class="ml-auto" onclick="toggle_updates_window(true)">X</div>
+                     </div>
+                  </div>
+                  <div class="dataTableContainer">
+                     <div id="blur-background" class="d-none blur-background"></div>
+                     <div class="fixed_updates_window_body">
+                     </div>
+                     <div id="lock-icon" class="d-none lock-icon">
+                        <div class="row d-flex justify-content-center">
+                           <i class="fa-solid fa-lock fa-5x"></i>
+                        </div>
+                        <div class="row">
+                           <span class="mt-2 text-center" style="font-weight: bold; font-size: 16px;">Only for TCI
+                              students</span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="fixed_updates_btn shadow">
+                  <button class="bg-color text-light" id="updates_btn" onclick="toggle_updates_window()"><img
+                        src="img/msg.png" width="25" height="25"></button>
+               </div>
+
+               <div class="top_arrow bg-color" onclick="$('html, body').animate({ scrollTop: 0 }, 'slow');">
+                  <i class="fa-solid fa-angles-up" style="color: #fff;"></i>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- main-panel ends -->
+   </div>
+   <footer class="footer">
+      <div class="row">
+         <div class="col-md-12">
+            2023 © TredCode. All Rights Reserved
+         </div>
+         <div class="col-12 font-weight-bold mt-1">
+            <a href="/disclaimer">Our Terms and Conditions</a>
+         </div>
+      </div>
+   </footer>
+
+   <!-- Modal - (Image Modal) -->
+   <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+         <div class="modal-content bg-color border-0">
+            <div class="modal-header">
+               <h5 class="modal-title text-white">Disclaimer: </h5>
+               <button type="button" class="btn-close bg-white close_modal" data-bs-dismiss="modal"
+                  aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-faint p-0" style="max-height: 80vh !important; overflow-y: auto;">
+               <div class="row d-flex justify-content-center">
+                  <div class="bg-color col-md-12 col-md col-lg m-2 rounded text-white" style="font-weight: 600;">
+                     <ul id="disclaimer">
+                        <li class="mb-2 d-none">We are not SEBI registered. We don’t provide tips or calls in any
+                           format.</li>
+                        <li class="mb-2">Tredcode’s sole aim is to give you market insights and help you make informed
+                           decisions in
+                           your trading.</li>
+                        <li class="mb-2">We don’t take funds from clients , nor do we handle any outside funds.</li>
+                        <li class="mb-2">The data in Tredcode is delayed by sometime to process it and to follow the
+                           guidelines by
+                           exchanges.</li>
+                        <li class="mb-2">All information shared here is for educational purposes only.</li>
+                        <li class="mb-2">If anyone approaches you for tips, calls, profit sharing , kindly report us. We
+                           are not
+                           responsible for any losses made in any form.</li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary bg-faint close_modal"
+                  data-bs-dismiss="modal">Close</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7771336524545257"
+      crossorigin="anonymous"></script>
+
+   <!-- Google tag (gtag.js) -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCHQ1VC2VL"></script>
+   <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+
+      gtag('config', 'G-NCHQ1VC2VL');
+   </script>
+
+   <!-- Jquery CDN -->
+   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+   <script src="js/jquery_3.7.0.js"></script>
+
+   <!-- Bootstrap bundle -->
+   <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"></script> -->
+   <script src="js/bootstrap.bundle.min.js"></script>
+
+   <!-- JWT Decode-->
+   <!-- <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script> -->
+   <script src="js/jwt_decode.js"></script>
+
+   <!-- Moment.JS -->
+   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script> -->
+   <script src="js/moment.min.js"></script>
+
+   <!-- Font Awesome -->
+   <script src="js/all.min.js"></script>
+
+   <!-- Manual Jquery -->
+   <script src="js/gg.min.js"></script>
+   <script src="js/vertical_navbar_js.js"></script>
+
+   <script>
+      $(document).ready(function () {
+         let page_access = username(cookieValue_1)
+         if (page_access[4]['p1'] == 0 && page_access[4]['p2'] == 0 && page_access[4]['p3'] == 0 && page_access[4]['p4'] == 0 && page_access[4]['idx'] == 0 && page_access[4]['mf'] == 0) {
+            $('.fixed_updates_window').remove()
+            $('.fixed_updates_btn').remove()
+         }
+      })
+   </script>
+
+</body>
+
+</html>

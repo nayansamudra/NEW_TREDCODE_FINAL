@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Trading Journal | Tredcode</title>
+   <!-- Bootstrap CSS -->
+   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"> -->
+   <link rel="stylesheet" type="text/css" href="css/bootstrap_5.3.css">
+
+   <!-- Manual CSS -->
+   <link rel="stylesheet" type="text/css" href="css/trading_journal.css">
+   <link rel="stylesheet" type="text/css" href="css/header.css">
+
+   <!-- ICONS -->
+   <link rel="icon" href="img/Tredcode_logo.png" sizes="32x32" />
+   <link rel="icon" href="img/Tredcode_logo.png" sizes="192x192" />
+
+   <!-- Font-Awesome -->
+   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+   <link rel="stylesheet" type="text/css" href="css/all.min.css">
+
+   <!-- Calender Heatmap Plugin -->
+   <link rel="stylesheet" type="text/css" href="css/jquery.CalendarHeatmap.css">
+
+   <!-- Calender (Monthly View)-->
+   <link rel="stylesheet" type="text/css" href="css/calendar-gc.css">
+
+   <!-- Fuzzy Suggestion -->
+   <link rel="stylesheet" type="text/css" href="css/fuzzycomplete.min.css">
+
+   <!-- DataTable-->
+   <link rel="stylesheet" type="text/css" href="css/datatables.css">
+
+   <style>
+      @media (min-width:576px) and (max-width:992px) {
+         .modal-xl {
+            max-width: 90% !important;
+         }
+      }
+
+      @media (max-width:992px) {
+         .modal-xl {
+            max-width: 75% !important;
+         }
+      }
+   </style>
+
+
+</head>
+
+<body>
+   <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+         <a class="navbar-brand brand-logo mx-2" href="/home"><img src="img/Tredcode_logo.png" alt="logo" /> </a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+         <span id="page_heading" class="text-light h3 m-auto">TRADING JOURNAL</span>
+         <ul class="nifty navbar-nav navbar-nav-right py-3 px-2" id="nifty_block_head">
+            <li class="text px-1"><span id="swingname1">NIFTY</span></li>
+            <li class="amount px-1 text-light"><span id="swingamount1">-</span></li>
+            <li class="border-radius-25 green-light-bg per px-2"><span id="swingper1">-%</span></li>
+         </ul>
+         <ul class="nifty navbar-nav navbar-nav-right py-3 px-2 ml-0" id="bnknifty_block_head">
+            <li class="text px-1"><span id="swingname2">BANKNIFTY</span></li>
+            <li class="amount px-1 text-light"><span id="swingamount2">-</span></li>
+            <li class="border-radius-25 pink-light-bg per px-2"><span id="swingper2">-%</span></li>
+         </ul>
+         <ul class="navbar-nav navbar-nav-right ml-0">
+            <li class="nav-item nav-profile dropdown" onclick="showLogout()">
+               <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
+                  id="profileDropdown">
+                  <img src="img/usericon.png" alt="profile" /> <span id="uname"></span>
+                  <i class="fa-solid fa-caret-down"></i>
+               </a>
+               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" id="Logout_button"
+                  aria-labelledby="profileDropdown">
+                  <a class="dropdown-item" href="javascript:void(0)">
+                     <i class="fa-solid fa-power-off"></i>
+                     Logout
+                  </a>
+               </div>
+            </li>
+         </ul>
+         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+            onclick="toggle_sidebar()">
+            <i class="fa-solid fa-bars"></i>
+         </button>
+      </div>
+   </nav>
+
+   <div id="notification">Dhan Access is not activated</div>
+
+   <div class="container-fluid page-body-wrapper" style="background-color:#0e0e0e;">
+      <nav class="sidebar sidebar-offcanvas" id="sidebar" style="transition:1s;position:fixed;width:60px"></nav>
+      <nav class="sidebar sidebar-offcanvas" id="sidebar2" style="visibility: hidden; width: 60px; display: none;">
+         <ul class="nav">
+            <li class="nav-item">
+               <a class="nav-link" href="">
+                  <img src="img/market_depth.png">
+               </a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="">
+                  <img src="img/pro_setup.png">
+               </a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="">
+                  <img src="img/sectorial_flow.png">
+               </a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="">
+                  <img src="img/swing_center.png">
+               </a>
+            </li>
+         </ul>
+      </nav>
+      <!-- main-panel starts -->
+      <div class="main-panel">
+         <div class="content-wrapper">
+
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="text-center bg-color1 border-radius-10">
+                     <div class="swing-heading">
+                        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3305687149330379"
+                           data-ad-slot="9230489380" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                        <script>
+                           (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Three Button-->
+            <div class="px-0" style="width: 100%;" id="Top_Bar">
+               <div class="row mx-2 my-2">
+                  <div class="col-12 px-0 py-0 text-light" id="Button_Col">
+                     <div class="px-0 container-fluid">
+                        <div class="d-flex align-items-center my-0">
+                           <div class="me-auto p-2 h-100 me-2 px-0 text-light button_height">
+                              <button class="go_btn bg-color text-white font-weight-bold w-100 h-100 rounded"
+                                 id="Video_button" type="button" data-bs-toggle="modal"
+                                 data-bs-target="#exampleModal5">How to use Trading Journal ?</button>
+                           </div>
+                           <div class="p-2 h-100 mx-3 px-0 text-light button_height">
+                              <button class="go_btn bg-color text-white font-weight-bold w-100 h-100 rounded Modal_Open"
+                                 id="add_trade" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1">Add
+                                 Trade (+)</button>
+                           </div>
+                           <div class="p-2 h-100 me-2 px-0 text-light button_height">
+                              <button class="go_btn bg-color text-white font-weight-bold w-100 h-100 rounded"
+                                 id="date_range_selector" type="button" data-bs-toggle="modal"
+                                 data-bs-target="#exampleModal2">Date Range Selector 📆</button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Calendar HeatMap (TradeBook)-->
+            <div class="row my-2 py-2 bg-color rounded">
+               <div class="mt-0 col calender_heatmap">
+                  <div class="d-flex text-light ch-title">
+                     <div class="p-1">Tradebook</div>
+                     <div class="p-1 flex-grow-1 text-center" style="color: #e8c15e;" id="TradeBook_warning_message">
+                        Please select the range to see the data</div>
+                  </div>
+                  <span id="Tradebook_alert"></span>
+                  <div id="CalendarHeatmap"></div>
+               </div>
+            </div>
+
+            <!-- Equity Curve -->
+            <div class="row mx-2 mb-2" id="equity_curve_container" style="display: none;">
+               <div class="col-lg-12 bg-color rounded" id="Equity_curve_div">
+                  <div class="px-0 py-0 col-12">
+                     <div class="px-0 container-fluid">
+
+                        <div class="d-flex">
+                           <div class="p-2 w-100">
+                              <div class="d-flex flex-row-reverse align-items-center my-0 py-0">
+                                 <div
+                                    class="p-2 h-100 me-3 px-0 bg-color text-light d-flex justify-content-center button_height">
+                                    <button class="px-4 go_btn bg-color text-white font-weight-bold w-100 h-100 rounded"
+                                       id="individual_day_curve" type="button">Daily P&L</button>
+                                 </div>
+                                 <div
+                                    class="p-2 h-100 me-3 px-0 bg-color text-light d-flex justify-content-center button_height">
+                                    <button
+                                       class="px-4 gb_active go_btn bg-color text-white font-weight-bold w-100 h-100 rounded"
+                                       id="equity_curve" type="button">Equity Curve</button>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="p-2 flex-shrink-1 d-flex align-items-center text-light"><i
+                                 class="fa-solid fa-rotate-right bar_chart"></i></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="mt-3 col calender_heatmap">
+                     <div id="show_hide_chart" style="height: 300px;">
+                        <canvas id="linechart"></canvas>
+                     </div>
+                     <div class="d-none" id="show_hide_apexchart" style="height: 300px;">
+                        <div id="barchart"></div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- 1 month Calendar detail view and All Stats (Monthly - Statistics)-->
+            <div class="row mx-2 mb-2" id="Bottom_Part">
+               <div class="col-lg-5 bg-color rounded px-0" id="one_month_calendar">
+                  <div id="calendar" style="padding: 0.5rem;"></div>
+               </div>
+               <div class="ms-2 col-lg bg-color rounded text-light" id="All_stats">
+                  <h3 class="mt-2 text-center">Statistics</h3>
+                  <div class="my-3 px-2 text-center selected_range" style="color: #ffbd5a;">
+                     <span id="All_stats_Entry_date"
+                        style="font-size: x-large; font-weight: 500; color: #fff;">------</span>
+                     &nbsp;to&nbsp;
+                     <span id="All_stats_Exit_date"
+                        style="font-size: x-large; font-weight: 500; color: #fff;">------</span>
+                  </div>
+                  <div class="mb-3 row selected_range">
+                     <div class="px-0 text-center bg-color1 rounded col mx-2">
+                        <table class="mx-0 my-2 px-0" style="font-size: x-large; font-weight: bold;">
+                           <tr>
+                              <td style="font-size: large; font-weight: bold;">Total P&L
+                                 <span data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-title="Total net profit and loss in the selected range"><i
+                                       class="fa-solid fa-circle-info"></i></span>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td class="answer_td" style="font-size: xx-large; font-weight: 400;"><span
+                                    id="total_profits">------</span></td>
+                           </tr>
+                        </table>
+                     </div>
+                     <div class="px-0 text-center bg-color1 rounded col mx-2">
+                        <table class="mx-0 my-2 px-0" style="font-size: x-large; font-weight: bold;">
+                           <tr>
+                              <td style="font-size: large; font-weight: bold;">Total Trades <span
+                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-title="Total trades taken in selected range"><i
+                                       class="fa-solid fa-circle-info"></i></span></td>
+                           </tr>
+                           <tr>
+                              <td class="answer_td" style="font-size: xx-large; font-weight: 400; color: #ffbd5a;"><span
+                                    id="total_trades">------</span></td>
+                           </tr>
+                        </table>
+                     </div>
+                     <div class="Laptop_view px-0 text-center bg-color1 rounded col mx-2">
+                        <table class="mx-0 my-2 px-0" style="font-size: x-large; font-weight: bold;">
+                           <tr>
+                              <td style="font-size: large; font-weight: bold;">Biggest Win <span
+                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-title="Highest amount of profit earned in a single trade in the selected range"><i
+                                       class="fa-solid fa-circle-info"></i></span></td>
+                           </tr>
+                           <tr>
+                              <td class="answer_td"
+                                 style="font-size: xx-large; font-weight: 400; color: rgb(123, 219, 123);"><span
+                                    id="biggest_win">------</span></td>
+                           </tr>
+                        </table>
+                     </div>
+                     <div class="Laptop_view px-0 text-center bg-color1 rounded col mx-2">
+                        <table class="mx-0 my-2 px-0" style="font-size: x-large; font-weight: bold;">
+                           <tr>
+                              <td style="font-size: large; font-weight: bold;">Biggest Loss <span
+                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-title="Highest amount of loss earned in a single trade in the selected range"><i
+                                       class="fa-solid fa-circle-info"></i></span></td>
+                           </tr>
+                           <tr>
+                              <td class="answer_td"
+                                 style="font-size: xx-large; font-weight: 400; color: rgb(252, 92, 93);"><span
+                                    id="biggest_loss">------</span></td>
+                           </tr>
+                        </table>
+                     </div>
+                  </div>
+                  <div class="mb-3 row selected_range" id="For_mobile_view">
+                     <div class="px-0 text-center bg-color1 rounded col mx-2">
+                        <table class="mx-0 my-2 px-0" style="font-size: x-large; font-weight: bold;">
+                           <tr>
+                              <td style="font-size: large; font-weight: bold;">Biggest Win <span
+                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-title="Highest amount of profit earned in a single trade in the selected range"><i
+                                       class="fa-solid fa-circle-info"></i></span></td>
+                           </tr>
+                           <tr>
+                              <td class="answer_td"
+                                 style="font-size: xx-large; font-weight: 400; color: rgb(123, 219, 123);"><span
+                                    id="biggest_win1">------</span></td>
+                           </tr>
+                        </table>
+                     </div>
+                     <div class="px-0 text-center bg-color1 rounded col mx-2">
+                        <table class="mx-0 my-2 px-0" style="font-size: x-large; font-weight: bold;">
+                           <tr>
+                              <td style="font-size: large; font-weight: bold;">Biggest Loss <span
+                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-title="Highest amount of loss earned in a single trade in the selected range"><i
+                                       class="fa-solid fa-circle-info"></i></span></td>
+                           </tr>
+                           <tr>
+                              <td class="answer_td"
+                                 style="font-size: xx-large; font-weight: 400; color: rgb(252, 92, 93);"><span
+                                    id="biggest_loss1">------</span></td>
+                           </tr>
+                        </table>
+                     </div>
+                  </div>
+                  <div class="mb-3 row selected_range">
+                     <div class="px-0 text-center bg-color1 rounded col mx-2">
+                        <table class="mx-0 my-2 px-0" style="font-size: x-large; font-weight: bold;">
+                           <tr>
+                              <td style="font-size: large; font-weight: bold;">Avg. Winner <span
+                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-title="sum of all the profits making trades / no. of profit-making trades, in that selected range"><i
+                                       class="fa-solid fa-circle-info"></i></span></td>
+                           </tr>
+                           <tr>
+                              <td class="answer_td"
+                                 style="font-size: xx-large; font-weight: 400; color: rgb(123, 219, 123)"><span
+                                    id="avg_winner">------</span></td>
+                           </tr>
+                        </table>
+                     </div>
+                     <div class="px-0 text-center bg-color1 rounded col mx-2">
+                        <table class="mx-0 my-2 px-0" style="font-size: x-large; font-weight: bold;">
+                           <tr>
+                              <td style="font-size: large; font-weight: bold;">Avg. Losser <span
+                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-title="sum of all the loss-making trades / no. of loss-making trades, in that selected range"><i
+                                       class="fa-solid fa-circle-info"></i></span></td>
+                           </tr>
+                           <tr>
+                              <td class="answer_td"
+                                 style="font-size: xx-large; font-weight: 400; color: rgb(252, 92, 93);"><span
+                                    id="avg_losser">------</span></td>
+                           </tr>
+                        </table>
+                     </div>
+                  </div>
+                  <div class="mb-3 row selected_range">
+                     <div class="px-0 text-center bg-color1 rounded col mx-2">
+                        <table class="mx-0 my-2 px-0" style="font-size: x-large; font-weight: bold;">
+                           <tr>
+                              <td style="font-size: large; font-weight: bold;">Risk to Reward <span
+                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-title="Avg. profit made for every 1 rupee loss. If reward is less than 1, that means our losses are bigger than the profits"><i
+                                       class="fa-solid fa-circle-info"></i></span></td>
+                           </tr>
+                           <tr>
+                              <td class="answer_td" style="font-size: xx-large; font-weight: 400; color: #ffbd5a;"><span
+                                    id="risk_reward">------</span></td>
+                           </tr>
+                        </table>
+                     </div>
+                     <div class="px-0 text-center bg-color1 rounded col mx-2">
+                        <table class="mx-0 my-2 px-0" style="font-size: x-large; font-weight: bold;">
+                           <tr>
+                              <td style="font-size: large; font-weight: bold;">Avg. P&L <span data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    data-bs-title="Total net profit or Loss divided by total no. of trades"><i
+                                       class="fa-solid fa-circle-info"></i></span></td>
+                           </tr>
+                           <tr>
+                              <td class="answer_td" style="font-size: xx-large; font-weight: 400;"><span
+                                    id="avg_pnl">------</span></td>
+                           </tr>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Chart (day wise chart) & Table (Montlty table)-->
+            <div class="row mx-2 mb-2" id="day_chart_and_monthly_table" style="display: none;">
+               <div class="col-lg-3 bg-color rounded px-0" id="bar_chart">
+                  <h3 class="mt-2 text-center text-light">Day-Wise Breakup</h3>
+                  <div id="bar_chart_apexchart" style="padding: 0.5rem;"></div>
+               </div>
+               <div class="ms-2 col-lg bg-color rounded px-1" id="monthly_breakup">
+                  <h3 class="mt-2 text-center text-light">Monthly Breakup</h3>
+                  <div class="row">
+                     <div class="px-0 text-center bg-color1 rounded" style="overflow-x: auto">
+                        <table class="mx-0 my-0 px-0 responsive-table" style="font-size: 9px; font-weight: bold;"
+                           id="Monthly_dataTable">
+                           <thead class="py-2" style="color:#a9fff8;">
+                              <tr>
+                                 <td>Year</td>
+                                 <td>Jan</td>
+                                 <td>Feb</td>
+                                 <td>Mar</td>
+                                 <td>Apr</td>
+                                 <td>May</td>
+                                 <td>Jun</td>
+                                 <td>Jul</td>
+                                 <td>Aug</td>
+                                 <td>Sep</td>
+                                 <td>Oct</td>
+                                 <td>Nov</td>
+                                 <td>Dec</td>
+                                 <td>Total</td>
+                              </tr>
+                           </thead>
+                           <tbody class="px-0" style="background-color: #1c1c1c; overflow-x: hidden;"></tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Table (TradeList)-->
+            <div class="row mx-2 mb-2" id="tradelist_table" style="display: none;">
+               <div class="col-lg-12 bg-color rounded text-light" id="Table_view">
+                  <div class="mb-4 row individual_day_data" style="display: block;">
+                     <div class="d-flex">
+                        <div class="p-2 w-100">
+                           <h3 class="mt-2 text-center">Trade List</h3>
+                        </div>
+                        <div class="p-2 flex-shrink-1 d-flex align-items-center"><i
+                              class="fa-solid fa-rotate-right data_Table_1"></i></div>
+                     </div>
+                     <div class="px-0 text-center bg-color1 rounded col" style="overflow-x: auto;">
+                        <div class="table-container">
+                           <table class="mx-0 my-0 px-0 responsive-table" style="font-size: 12px; font-weight: bold;"
+                              id="dataTable">
+                              <thead class="py-2" style="color:#a9fff8">
+                                 <tr>
+                                    <td>Status</td>
+                                    <td>Entry Time</td>
+                                    <td>Exit Time</td>
+                                    <td>Symbol</td>
+                                    <td>Entry</td>
+                                    <td>Exit</td>
+                                    <td>Quantity</td>
+                                    <td>Type</td>
+                                    <td>Return</td>
+                                    <td>ROC %</td>
+                                    <td>Action</td>
+                                 </tr>
+                              </thead>
+                              <tbody class="px-2" style="background-color: #1c1c1c;"></tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Top Winner and Top Losser -->
+            <div class="row mx-2 mb-2" id="Top_winner_losser">
+               <div class="col-lg-6 bg-color rounded px-0" id="Top_Winner">
+                  <h3 class="mt-2 text-center text-light">Top Winner</h3>
+                  <div class="mb-3 row selected_range text-light">
+                     <div class="px-0 text-center bg-color1 rounded col mx-2">
+                        <table class="mx-0 my-2 px-0" style="font-size: x-large; font-weight: bold;">
+                           <tr>
+                              <td style="font-size: large; font-weight: bold;">
+                                 <span id="Top_Winner_1_Name">Winner 1</span>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td class="answer_td"
+                                 style="font-size: xx-large; font-weight: 400; color: rgb(123, 219, 123);">
+                                 <span id="Top_Winner_1_Value">------</span>
+                              </td>
+                           </tr>
+                        </table>
+                     </div>
+                     <div class="px-0 text-center bg-color1 rounded col mx-2">
+                        <table class="mx-0 my-2 px-0" style="font-size: x-large; font-weight: bold;">
+                           <tr>
+                              <td style="font-size: large; font-weight: bold;">
+                                 <span id="Top_Winner_2_Name">Winner 2</span>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td class="answer_td"
+                                 style="font-size: xx-large; font-weight: 400; color: rgb(123, 219, 123);">
+                                 <span id="Top_Winner_2_Value">------</span>
+                              </td>
+                           </tr>
+                        </table>
+                     </div>
+                     <div class="px-0 text-center bg-color1 rounded col mx-2">
+                        <table class="mx-0 my-2 px-0" style="font-size: x-large; font-weight: bold;">
+                           <tr>
+                              <td style="font-size: large; font-weight: bold;">
+                                 <span id="Top_Winner_3_Name">Winner 3</span>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td class="answer_td"
+                                 style="font-size: xx-large; font-weight: 400; color: rgb(123, 219, 123);">
+                                 <span id="Top_Winner_3_Value">------</span>
+                              </td>
+                           </tr>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+               <div class="ms-2 col-lg bg-color rounded px-1" id="Top_Losser">
+                  <h3 class="mt-2 text-center text-light">Top Losser</h3>
+                  <div class="mb-3 row selected_range text-light">
+                     <div class="px-0 text-center bg-color1 rounded col mx-2">
+                        <table class="mx-0 my-2 px-0" style="font-size: x-large; font-weight: bold;">
+                           <tr>
+                              <td style="font-size: large; font-weight: bold;">
+                                 <span id="Top_Losser_1_Name">Losser 1</span>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td class="answer_td"
+                                 style="font-size: xx-large; font-weight: 400; color: rgb(252, 92, 93);">
+                                 <span id="Top_Losser_1_Value">------</span>
+                              </td>
+                           </tr>
+                        </table>
+                     </div>
+                     <div class="px-0 text-center bg-color1 rounded col mx-2">
+                        <table class="mx-0 my-2 px-0" style="font-size: x-large; font-weight: bold;">
+                           <tr>
+                              <td style="font-size: large; font-weight: bold;">
+                                 <span id="Top_Losser_2_Name">Losser 2</span>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td class="answer_td"
+                                 style="font-size: xx-large; font-weight: 400; color: rgb(252, 92, 93);">
+                                 <span id="Top_Losser_2_Value">------</span>
+                              </td>
+                           </tr>
+                        </table>
+                     </div>
+                     <div class="px-0 text-center bg-color1 rounded col mx-2">
+                        <table class="mx-0 my-2 px-0" style="font-size: x-large; font-weight: bold;">
+                           <tr>
+                              <td style="font-size: large; font-weight: bold;">
+                                 <span id="Top_Losser_3_Name">Losser 3</span>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td class="answer_td"
+                                 style="font-size: xx-large; font-weight: 400; color: rgb(252, 92, 93);">
+                                 <span id="Top_Losser_3_Value">------</span>
+                              </td>
+                           </tr>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="text-center bg-color1 border-radius-10">
+                     <div class="swing-heading">
+                        <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed"
+                           data-ad-client="ca-pub-6938710509021107" data-ad-slot="1655501713"></ins>
+                        <script>
+                           (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Chat Box (at the end)-->
+            <div class="chat_slide_wrapper">
+               <div class="fixed_updates_window text-light bg-color">
+                  <div class="fixed_updates_window_head font-weight-bold">
+                     <div class="h-100 d-flex align-items-center">
+                        <div class="">Updates &nbsp;<i class="fa-solid fa-message"></i></div>
+                        <div class="ml-auto" onclick="toggle_updates_window(true)">X</div>
+                     </div>
+                  </div>
+                  <div class="dataTableContainer">
+                     <div id="blur-background" class="d-none blur-background"></div>
+                     <div class="fixed_updates_window_body">
+                     </div>
+                     <div id="lock-icon" class="d-none lock-icon">
+                        <div class="row d-flex justify-content-center">
+                           <i class="fa-solid fa-lock fa-5x"></i>
+                        </div>
+                        <div class="row">
+                           <span class="mt-2 text-center" style="font-weight: bold; font-size: 16px;">Only for TCI
+                              students</span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="fixed_updates_btn shadow">
+                  <button class="bg-color text-light" id="updates_btn" onclick="toggle_updates_window()"><img
+                        src="img/msg.png" width="25" height="25"></button>
+               </div>
+
+               <div class="top_arrow bg-color" onclick="$('html, body').animate({ scrollTop: 0 }, 'slow');">
+                  <i class="fa-solid fa-angles-up" style="color: #fff;"></i>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- main-panel ends -->
+   </div>
+
+   <!-- Toast (Alerts)-->
+
+   <footer class="footer">
+      <div class="row">
+         <div class="col-md-12">
+            2023 © TredCode. All Rights Reserved
+         </div>
+         <div class="col-12 font-weight-bold mt-1">
+            <a href="/disclaimer">Our Terms and Conditions</a>
+         </div>
+      </div>
+   </footer>
+
+   <!-- Modal - (Add trade inputs) -->
+   <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+         <div class="modal-content bg-color border-0">
+            <div class="modal-header border-bottom-0">
+               <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">Add Trade Inputs:</h1>
+               <button type="button" id="add_n_update_trade_close" class="btn-close bg-white bg-faint close_modal"
+                  data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-faint">
+               <table id="add_update_table">
+                  <tr>
+                     <td>Trade Type:<span class="ps-1" style="font-size: 20px; color:#fff">*</span></td>
+                     <td class="d-flex align-items-center">
+                        <span style="font-weight: 500; color:#fff" id="long_text">Long</span> <label class="switch">
+                           <input type="checkbox" id="checkbox">
+                           <span class="slider"></span>
+                        </label> <span style="font-weight: 500; color:#fff" id="short_text">Short</span>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Entry Date & Time:<span class="ps-1" style="font-size: 20px; color:#fff">*</span></td>
+                     <td>
+                        <span data-bs-toggle="tooltip" data-bs-placement="top"
+                           data-bs-title="Enter Date & Time when trade was Initiated"><i
+                              class="fa-solid fa-circle-info"></i></span>
+                        <input id="Entry_date_time" type="datetime-local" placeholder="Select Date and Time"
+                           autocomplete="off" required>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Exit Date & Time:<span class="ps-1" style="font-size: 20px; color:#fff">*</span></td>
+                     <td><span data-bs-toggle="tooltip" data-bs-placement="top"
+                           data-bs-title="Enter Date & Time when trade was Exited"><i
+                              class="fa-solid fa-circle-info"></i></span>
+                        <input id="Exit_date_time" type="datetime-local" placeholder="Select Date and Time"
+                           autocomplete="off" required>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Symbol/Ticker:<span class="ps-1" style="font-size: 20px; color:#fff">*</span></td>
+                     <td><span data-bs-toggle="tooltip" data-bs-placement="top"
+                           data-bs-title="Enter name of the Traded Instrument"><i
+                              class="fa-solid fa-circle-info"></i></span>
+                        <input type="text" id="Symbol_Ticker" name="Symbol_Ticker" placeholder="Type here..."
+                           autocomplete="off" class="placeholder-color" required>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Entry Price:<span class="ps-1" style="font-size: 20px; color:#fff">*</span></td>
+                     <td><span data-bs-toggle="tooltip" data-bs-placement="top"
+                           data-bs-title="Price at which Entry was taken"><i class="fa-solid fa-circle-info"></i></span>
+                        <input type="text" oninput="validateInput(this)" id="Entry_price" name="Entry_price"
+                           autocomplete="off" required>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Exit Price:<span class="ps-1" style="font-size: 20px; color:#fff">*</span></td>
+                     <td><span data-bs-toggle="tooltip" data-bs-placement="top"
+                           data-bs-title="Price at which Exit was taken"><i class="fa-solid fa-circle-info"></i></span>
+                        <input type="text" oninput="validateInput(this)" id="Exit_price" name="Exit_price"
+                           autocomplete="off" required>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Quantity:<span class="ps-1" style="font-size: 20px; color:#fff">*</span></td>
+                     <td>
+                        <span data-bs-toggle="tooltip" data-bs-placement="top"
+                           data-bs-title="Don’t use negative sign, it will automatically assign based on long and short trade type"><i
+                              class="fa-solid fa-circle-info"></i></span>
+                        <input type="text" oninput="validateInput1(this)" id="Quantity" name="Quantity"
+                           autocomplete="off" required>
+                     </td>
+                  </tr>
+                  <tr id="Image_input_row">
+                     <td>Upload image:</td>
+                     <td>
+                        <span data-bs-toggle="tooltip" data-bs-placement="top"
+                           data-bs-title="Upload snapshot of Trade Setup, Maximum 2MB Image size allowed"><i
+                              class="fa-solid fa-circle-info"></i></span>
+                        <input type="file" spellcheck="false" name="filename" id="Image_input" autocomplete="off">
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>How did you find the trade ?</td>
+                     <td class="d-flex align-items-center"><span data-bs-toggle="tooltip" data-bs-placement="top"
+                           data-bs-title="Explain here, what are your finding before taking trades. Why you took that trade ?"><i
+                              class="fa-solid fa-circle-info"></i></span>&nbsp;
+                        <textarea rows="3" id="Find_Trade" name="Find_Trade" placeholder="Only upto 300 character"
+                           class="placeholder-color"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Entry Reason:</td>
+                     <td class="d-flex align-items-center"><span data-bs-toggle="tooltip" data-bs-placement="top"
+                           data-bs-title="Notes for why was the entry taken"><i
+                              class="fa-solid fa-circle-info"></i></span>&nbsp;
+                        <textarea rows="3" id="Entry_reason" name="Entry_reason" placeholder="Only upto 300 character"
+                           class="placeholder-color"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Exit Reason:</td>
+                     <td class="d-flex align-items-center"><span data-bs-toggle="tooltip" data-bs-placement="top"
+                           data-bs-title="Notes for why was the exit taken"><i
+                              class="fa-solid fa-circle-info"></i></span>&nbsp;
+                        <textarea rows="3" id="Exit_reason" name="Exit_reason" placeholder="Only upto 300 character"
+                           class="placeholder-color"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Mistakes made / Lessons learned</td>
+                     <td class="d-flex align-items-center"><span data-bs-toggle="tooltip" data-bs-placement="top"
+                           data-bs-title="What mistakes you made, what you learned from that and what process will you follow to avoid such mistakes in future ?"><i
+                              class="fa-solid fa-circle-info"></i></span>&nbsp;
+                        <textarea rows="3" id="Mistakes" name="Mistakes" placeholder="Only upto 300 character"
+                           class="placeholder-color"></textarea>
+                     </td>
+                  </tr>
+               </table>
+               <div id="success_message" style="display: none;">
+                  <h1>Trade Added Successfully !</h1>
+               </div>
+            </div>
+            <div class="modal-footer border-top-0">
+               <button type="button" class="btn btn-secondary bg-faint close_modal"
+                  data-bs-dismiss="modal">Close</button>
+               <button type="button" class="btn btn-secondary bg-faint" id="add_trade_submit">Submit</button>
+               <button type="button" class="btn btn-secondary d-none bg-faint" id="update_trade_submit">Update</button>
+               <button type="button" class="btn btn-secondary bg-faint d-none" id="add_another_trade">Add Another
+                  Trade</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- Modal - (Select Date Range) -->
+   <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+         <div class="modal-content bg-color border-0">
+            <div class="modal-header border-bottom-0">
+               <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">Select Date Range:</h1>
+               <button type="button" id="view_trade_close" class="btn-close bg-white" data-bs-dismiss="modal"
+                  aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-faint">
+               <table>
+                  <tr>
+                     <td>Select Range:</td>
+                     <td class="d-flex align-items-center">
+                        <span style="font-weight: 500; color:#fff" id="all">All</span> <label class="switch1">
+                           <input type="checkbox" id="checkbox1">
+                           <span class="slider1"></span>
+                        </label> <span style="font-weight: 500; color:#fff" id="select_range">Select</span>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="disable_color">Entry Date:</td>
+                     <td><input type="date" id="Entry_date" name="Entry_date" autocomplete="off"></td>
+                  </tr>
+                  <tr>
+                     <td class="disable_color">Exit Date:</td>
+                     <td><input type="date" id="Exit_date" name="Exit_date" autocomplete="off"></td>
+                  </tr>
+               </table>
+            </div>
+            <div class="modal-footer border-top-0">
+               <button type="button" class="btn btn-outline-light" id="view_trade_submit">View</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- Modal - (Delete Modal) -->
+   <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+         <div class="modal-content bg-color border-0">
+            <div class="modal-header border-bottom-0">
+               <h1 class="modal-title fs-5 text-light" id="exampleModalLabe3">Delete Confirmation</h1>
+               <button type="button" id="delete_trade_close" class="btn-close bg-white bg-faint close_modal"
+                  data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-faint">
+               <div class="d-flex justify-content-center"><i class="fa-solid fa-circle-exclamation fa-4x"
+                     id="delete_icon"></i></div>
+               <h1 class="text-center">Confirm</h1>
+               <p class="text-center mb-0">Are you sure want to permanently delete this Trade?</p>
+            </div>
+            <div class="modal-footer border-top-0">
+               <button type="button" class="btn btn-secondary bg-faint close_modal"
+                  data-bs-dismiss="modal">Cancel</button>
+               <button type="button" class="btn btn-danger" id="delete_trade_submit"
+                  onclick="confirm_yes()">Delete</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- Modal - (Image Modal) -->
+   <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+         <div class="modal-content bg-color border-0">
+            <div class="modal-header border-bottom-0">
+               <button type="button" id="view_trade_image_close" class="btn-close bg-white close_modal"
+                  data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-faint" style="max-height: 80vh !important; overflow-y: auto;">
+               <img id="modal_image" src="" class="modal-image">
+
+               <div class="my-1 row text-light">
+                  <div class="px-0 text-center bg-color1 rounded col mx-0 me-1">
+                     <table class="mx-0 px-0" style="color: #a9fff8;">
+                        <tr>
+                           <td style="font-size: large; font-weight: 400">Status
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="answer_td" id="image_modal_status"
+                              style="font-size: large; font-weight: 400; color: rgb(123, 219, 123);">
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+                  <div class="px-0 text-center bg-color1 rounded col mx-0">
+                     <table class="mx-0 px-0" style="color: #a9fff8;">
+                        <tr>
+                           <td style="font-size: large; font-weight: 400;">Returns
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="answer_td" id="image_modal_returns"
+                              style="font-size: large; font-weight: 400; color: rgb(123, 219, 123);">
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+               <div class="my-1 row text-light">
+                  <div class="px-0 text-center bg-color1 rounded col mx-0 me-1">
+                     <table class="mx-0 px-0" style="color: #a9fff8;">
+                        <tr>
+                           <td style="font-size: large; font-weight: 400;">ROC %
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="answer_td" id="image_modal_roc"
+                              style="font-size: large; font-weight: 400; color: rgb(123, 219, 123);">
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+                  <div class="px-0 text-center bg-color1 rounded col mx-0">
+                     <table class="mx-0 px-0" style="color: #a9fff8;">
+                        <tr>
+                           <td style="font-size: large; font-weight: 400;">Type
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="answer_td" id="image_modal_type"
+                              style="font-size: large; font-weight: 400; color: rgb(123, 219, 123);">
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+               <div class="my-1 row text-light">
+                  <div class="px-0 text-center bg-color1 rounded col mx-0 me-1">
+                     <table class="mx-0 px-0" style="color: #a9fff8;">
+                        <tr>
+                           <td style="font-size: large; font-weight: 400;">Entry Date & Time
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="answer_td" id="image_modal_entry_date_time"
+                              style="font-size: large; font-weight: 400; color: #ffbd5a;">
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+                  <div class="px-0 text-center bg-color1 rounded col mx-0">
+                     <table class="mx-0 px-0" style="color: #a9fff8;">
+                        <tr>
+                           <td style="font-size: large; font-weight: 400;">
+                              Exit Date & time
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="answer_td" id="image_modal_exit_date_time"
+                              style="font-size: large; font-weight: 400; color: #ffbd5a;">
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+               <div class="my-1 row text-light">
+                  <div class="px-0 text-center bg-color1 rounded col mx-0 me-1">
+                     <table class="mx-0 px-0" style="color: #a9fff8;">
+                        <tr>
+                           <td style="font-size: large; font-weight: 400;">
+                              Entry Price
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="answer_td" id="image_modal_entry_price"
+                              style="font-size: large; font-weight: 400; color: #ffbd5a;">
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+                  <div class="px-0 text-center bg-color1 rounded col mx-0">
+                     <table class="mx-0 px-0" style="color: #a9fff8;">
+                        <tr>
+                           <td style="font-size: large; font-weight: 400;">
+                              Exit Price
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="answer_td" id="image_modal_exit_price"
+                              style="font-size: large; font-weight: 400; color: #ffbd5a;">
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+               <div class="my-1 row text-light">
+                  <div class="px-0 text-center bg-color1 rounded col mx-0 me-1">
+                     <table class="mx-0 px-0" style="color: #a9fff8;">
+                        <tr>
+                           <td style="font-size: large; font-weight: 400;">
+                              Symbol
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="answer_td" id="image_modal_symbol"
+                              style="font-size: large; font-weight: 400; color: #ffbd5a;">
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+                  <div class="px-0 text-center bg-color1 rounded col mx-0">
+                     <table class="mx-0 px-0" style="color: #a9fff8;">
+                        <tr>
+                           <td style="font-size: large; font-weight: 400;">
+                              Quantity
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="answer_td" id="image_modal_quantity"
+                              style="font-size: large; font-weight: 400; color: #ffbd5a;">
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+               <div class="my-1 row text-light">
+                  <div class="px-0 text-center bg-color1 rounded col mx-0 me-1">
+                     <table class="mx-0 px-0" style="color: #a9fff8;">
+                        <tr>
+                           <td style="font-size: large; font-weight: 400;">
+                              Trade Logic
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="answer_td" id="image_modal_trade_logic"
+                              style="font-size: large; font-weight: 400; color:#fff">
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+                  <div class="px-0 text-center bg-color1 rounded col mx-0">
+                     <table class="mx-0 px-0" style="color: #a9fff8;">
+                        <tr>
+                           <td style="font-size: large; font-weight: 400;">
+                              Entry Reason
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="answer_td" id="image_modal_entry_reason"
+                              style="font-size: large; font-weight: 400; color: #fff">
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+               <div class="my-1 row text-light">
+                  <div class="px-0 text-center bg-color1 rounded col mx-0 me-1">
+                     <table class="mx-0 px-0" style="color: #a9fff8;">
+                        <tr>
+                           <td style="font-size: large; font-weight: 400;">
+                              Exit Reason
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="answer_td" id="image_modal_exit_reason"
+                              style="font-size: large; font-weight: 400; color: #fff">
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+                  <div class="px-0 text-center bg-color1 rounded col mx-0">
+                     <table class="mx-0 px-0" style="color: #a9fff8;">
+                        <tr>
+                           <td style="font-size: large; font-weight: 400;">
+                              Mistake / Lesson
+                           </td>
+                        </tr>
+                        <tr>
+                           <td class="answer_td" id="image_modal_mistake_lesson"
+                              style="font-size: large; font-weight: 400; color: #fff">
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+
+            </div>
+            <div class="modal-footer border-top-0">
+               <button type="button" class="btn btn-secondary bg-faint" id="edit_trade_button">Edit</button>
+               <button type="button" class="btn btn-secondary bg-faint" id="delete_trade_button" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal3">Delete</button>
+               <button type="button" class="btn btn-secondary bg-faint close_modal"
+                  data-bs-dismiss="modal">Close</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- Modal - (How to use Trdaing Journal - Video) -->
+   <div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl" id="exampleModal5_modal_dialog">
+         <div class="modal-content bg-color border-0">
+            <div class="modal-header border-bottom-0">
+               <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">Select Language: </h1>
+               <button type="button" class="btn-close bg-white close_modal video_modal_close" data-bs-dismiss="modal"
+                  aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-faint" style="max-height: 80vh !important; overflow-y: auto;">
+               <button class="go_btn bg-color text-white font-weight-bold w-25 h-100 rounded gb_active me-3"
+                  id="english_language" type="button">ENGLISH</button>
+               <button class="go_btn bg-color text-white font-weight-bold w-25 h-100 rounded" id="hindi_language"
+                  type="button">HINDI</button>
+               <div class="px-0 mt-3 video-container" id="video_container">
+                  <span class="my-5" style="font-size: x-large; font-weight: 600;" id="coming_soon">COMING
+                     SOON...</span>
+                  <iframe
+                     src="https://player.vimeo.com/video/864752466?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+                     width="1152" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture"
+                     title="trading journal final"></iframe>
+               </div>
+            </div>
+            <div class="modal-footer border-top-0">
+               <button type="button" class="btn btn-secondary bg-faint close_modal video_modal_close"
+                  data-bs-dismiss="modal">Close</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7771336524545257"
+      crossorigin="anonymous"></script>
+
+   <!-- Google tag (gtag.js) -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCHQ1VC2VL"></script>
+   <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+
+      gtag('config', 'G-NCHQ1VC2VL');
+   </script>
+
+   <!-- Jquery CDN -->
+   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+   <script src="js/jquery_3.7.0.js"></script>
+
+   <!-- Bootstrap bundle -->
+   <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"></script> -->
+   <script src="js/bootstrap.bundle.min.js"></script>
+
+   <!-- JWT Decode-->
+   <!-- <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script> -->
+   <script src="js/jwt_decode.js"></script>
+
+   <!-- Moment.JS -->
+   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script> -->
+   <script src="js/moment.min.js"></script>
+
+   <!-- Font Awesome -->
+   <script src="js/all.min.js"></script>
+
+   <!-- Calender Heatmap Plugin -->
+   <script src="js/jquery.CalendarHeatmap.js"></script>
+
+   <!-- Calender (Monthly View)-->
+   <script src="js/calendar-gc.js"></script>
+
+   <!-- Fuzzy Suggestion -->
+   <script src="js/fuse.min.js"></script>
+   <script src="js/fuzzycomplete.min.js"></script>
+
+   <!-- Datatable -->
+   <script src="js/datatables.min.js"></script>
+
+   <!-- Apexchart -->
+   <script src="js/apexcharts.js"></script>
+
+   <!-- chart.js-->
+   <script src="js/chart.js"></script>
+   <script src="js/chartjs-plugin-crosshair.js"></script>
+
+   <!-- Vimeo player -->
+   <script src="js/vimeo_player.js"></script>
+
+   <!-- Manual Jquery -->
+   <script>
+      if ($(window).width() < 575) {
+         $('#Video_button').html('How to use <br> Trading Journal ?')
+         $('#add_trade').html('Add <br> Trade (+)')
+         $('#date_range_selector').html('Date Range <br> Selector 📆')
+         $('.modal-dialog').removeClass('modal-lg')
+         $('.modal-dialog').removeClass('modal-xl')
+         $('#delete_icon').removeClass().addClass('fa-solid fa-circle-exclamation fa-4x')
+      } else if ($(window).width() >= 575) {
+         $('#Video_button').text('How to use Trading Journal ?')
+         $('#add_trade').text('Add Trade (+)')
+         $('#date_range_selector').text('Date Range Selector 📆')
+         $('.modal-dialog').addClass('modal-lg')
+         $('#exampleModal5_modal_dialog').removeClass('modal-lg').addClass('modal-xl')
+         $('#delete_icon').removeClass().addClass('fa-solid fa-circle-exclamation fa-5x')
+      }
+
+      $(window).on("resize", function () {
+         if ($(window).width() < 575) {
+            $('#Video_button').html('How to use <br> Trading Journal ?')
+            $('#add_trade').html('Add <br> Trade (+)')
+            $('#date_range_selector').html('Date Range <br> Selector 📆')
+            $('.modal-dialog').removeClass('modal-lg')
+            $('.modal-dialog').removeClass('modal-xl')
+         } else if ($(window).width() >= 575) {
+            $('#Video_button').text('How to use Trading Journal ?')
+            $('#add_trade').text('Add Trade (+)')
+            $('#date_range_selector').text('Date Range Selector 📆')
+            $('.modal-dialog').addClass('modal-lg')
+            $('#exampleModal5_modal_dialog').removeClass('modal-lg').addClass('modal-xl')
+         }
+      })
+   </script>
+
+   <script src="js/gg.min.js"></script>
+   <script src="js/vertical_navbar_js.js"></script>
+   <script src="js/trading_journal.js"></script>
+</body>
+
+</html>

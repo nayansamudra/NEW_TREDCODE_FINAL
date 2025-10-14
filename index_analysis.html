@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Index Analysis | Tredcode</title>
+   <!-- Bootstrap CSS -->
+   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"> -->
+   <link rel="stylesheet" type="text/css" href="css/bootstrap_5.3.css">
+
+   <!--Plugin CSS file with desired skin (Range Slider)-->
+   <!-- <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css" /> -->
+   <link rel="stylesheet" type="text/css" href="css/ion.rangeSlider.min.css">
+
+   <!-- Manual CSS -->
+   <link rel="stylesheet" type="text/css" href="css/header.css">
+   <link rel="stylesheet" type="text/css" href="css/index_analysis.css">
+   <link rel="stylesheet" type="text/css" href="css/apexchart.css">
+
+   <!-- ICONS -->
+   <link rel="icon" href="img/Tredcode_logo.png" sizes="32x32" />
+   <link rel="icon" href="img/Tredcode_logo.png" sizes="192x192" />
+
+   <!-- Font-Awesome -->
+   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+   <link rel="stylesheet" type="text/css" href="css/all.min.css">
+
+   <!-- ti-icons  -->
+   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ti-icons@0.1.2/css/themify-icons.css"> -->
+   <link rel="stylesheet" type="text/css" href="css/themify-icons.css">
+
+   <style>
+      @media (max-width:850px) {
+         #finnifty_body_col span {
+            font-size: xx-large !important;
+         }
+
+         #finnifty_body_col {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+         }
+      }
+
+      @media (max-width:576px) {
+         #finnifty_body_col span {
+            font-size: x-large !important;
+         }
+
+         #finnifty_body_row {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+         }
+
+         .go_btn {
+            font-size: 12px !important;
+         }
+      }
+
+      @media (max-width:460px) {
+         .me-3 {
+            margin-right: 0.25rem !important;
+         }
+
+         .ms-3 {
+            margin-left: 0.25rem !important;
+         }
+
+         .mx-3 {
+            margin-left: 0.25rem !important;
+            margin-right: 0.25rem !important;
+         }
+      }
+
+      @media (max-width:350px) {
+         #sensex_btn {
+            margin-top: 0.5rem !important;
+            margin-left: 0.25rem !important;
+         }
+      }
+
+      @media (max-width:290px) {
+         #midcap_btn {
+            margin-top: 0.5rem !important;
+            margin-left: 0.25rem !important;
+         }
+      }
+
+      .button_height {
+         height: 50px !important;
+      }
+   </style>
+
+</head>
+
+<body>
+   <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+         <a class="navbar-brand brand-logo mx-2" href="/home"><img src="img/Tredcode_logo.png" alt="logo" /> </a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+         <span id="page_heading" class="text-light h3 m-auto">INDEX ANALYSIS</span>
+         <ul class="nifty navbar-nav navbar-nav-right py-3 px-2" id="nifty_block_head">
+            <li class="text px-1"><span id="swingname1">NIFTY</span></li>
+            <li class="amount px-1 text-light"><span id="swingamount1">-</span></li>
+            <li class="border-radius-25 green-light-bg per px-2"><span id="swingper1">-%</span></li>
+         </ul>
+         <ul class="nifty navbar-nav navbar-nav-right py-3 px-2 ml-0" id="bnknifty_block_head">
+            <li class="text px-1"><span id="swingname2">BANKNIFTY</span></li>
+            <li class="amount px-1 text-light"><span id="swingamount2">-</span></li>
+            <li class="border-radius-25 pink-light-bg per px-2"><span id="swingper2">-%</span></li>
+         </ul>
+         <ul class="navbar-nav navbar-nav-right ml-0">
+            <li class="nav-item nav-profile dropdown" onclick="showLogout()">
+               <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
+                  id="profileDropdown">
+                  <img src="img/usericon.png" alt="profile" /> <span id="uname"></span>
+                  <i class="fa-solid fa-caret-down"></i>
+               </a>
+               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" id="Logout_button"
+                  aria-labelledby="profileDropdown">
+                  <a class="dropdown-item" href="javascript:void(0)">
+                     <i class="fa-solid fa-power-off"></i>
+                     Logout
+                  </a>
+               </div>
+            </li>
+         </ul>
+         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+            onclick="toggle_sidebar()">
+            <i class="fa-solid fa-bars"></i>
+         </button>
+      </div>
+   </nav>
+
+   <div class="container-fluid page-body-wrapper" style="background-color:#0e0e0e;">
+      <nav class="sidebar sidebar-offcanvas" id="sidebar" style="transition:1s;position:fixed;width:60px"></nav>
+      <nav class="sidebar sidebar-offcanvas" id="sidebar2" style="visibility: hidden; width: 60px; display: none;">
+         <ul class="nav">
+            <li class="nav-item">
+               <a class="nav-link" href="">
+                  <img src="img/market_depth.png">
+               </a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="">
+                  <img src="img/pro_setup.png">
+               </a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="">
+                  <img src="img/sectorial_flow.png">
+               </a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="">
+                  <img src="img/swing_center.png">
+               </a>
+            </li>
+         </ul>
+      </nav>
+      <!-- main-panel start -->
+      <div class="main-panel">
+         <div class="content-wrapper">
+
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="text-center bg-color1 border-radius-10">
+                     <div class="swing-heading">
+                        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3305687149330379"
+                           data-ad-slot="9230489380" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                        <script>
+                           (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="d-flex justify-content-center mb-4">
+               <!-- <a href="/trade-with-tredcode"><span class="tooltip_1">>> Trade with Tredcode</span></a> -->
+               <a href="/trade-with-tredcode" role="button" class="btn btn-outline-info" id="check_access_button"
+                  style="font-weight: bold; text-decoration: underline;">>> Trade with Tredcode</a>
+            </div>
+
+            <!-- Top Bar  -->
+            <div class="px-0" style="width: 100%;" id="Top_Bar">
+               <!-- Range Slider -->
+               <div class="row mx-2 my-2 bg-color rounded">
+                  <div class="col-10 col-md-11 py-3 text-light" id="Range_Slider">
+                     <input type="text" class="mx-2 js-range-slider" name="my_range" value="" />
+                  </div>
+                  <div class="col-2 col-md-1 ps-0 my-3 text-light d-flex justify-content-center align-items-center">
+                     <button class="go_btn bg-color text-white font-weight-bold w-100 h-100 rounded" id="Submit"
+                        type="button" onclick="fetch_data()">GO</button>
+                  </div>
+               </div>
+               <!-- Five Button -->
+               <div class="row mx-2 my-2 bg-color rounded">
+                  <div class="col-12 px-0 py-3 text-light" id="Button_Col">
+                     <div class="px-0 container-fluid">
+                        <div class="row d-flex align-items-center my-0">
+                           <div
+                              class="col w-100 h-100 mx-3 px-0 bg-color text-light d-flex justify-content-center button_height">
+                              <button class="go_btn bg-color text-white font-weight-bold w-100 h-100 rounded gb_active"
+                                 id="nifty_btn" type="button">NIFTY</button>
+                           </div>
+                           <div
+                              class="col w-100 h-100 me-3 px-0 bg-color text-light d-flex justify-content-center button_height">
+                              <button class="go_btn bg-color text-white font-weight-bold w-100 h-100 rounded"
+                                 id="bnknifty_btn" type="button">BANKNIFTY</button>
+                           </div>
+                           <div
+                              class="col w-100 h-100 me-3 px-0 bg-color text-light d-flex justify-content-center button_height">
+                              <button
+                                 class="go_btn bg-color text-white font-weight-bold w-100 h-100 rounded finnifty_btn"
+                                 id="finnifty_btn" type="button">FINNIFTY</button>
+                           </div>
+                           <div
+                              class="col w-100 h-100 me-3 px-0 bg-color text-light d-flex justify-content-center button_height">
+                              <button class="go_btn bg-color text-white font-weight-bold w-100 h-100 rounded midcap_btn"
+                                 id="midcap_btn" type="button">MIDCAP</button>
+                           </div>
+                           <div
+                              class="col w-100 h-100 me-3 px-0 bg-color text-light d-flex justify-content-center button_height">
+                              <button class="go_btn bg-color text-white font-weight-bold w-100 h-100 rounded sensex_btn"
+                                 id="sensex_btn" type="button">SENSEX</button>
+                           </div>
+                           <div class="col me-3 px-0 mx-auto">
+                              <div class="pt-2 row text-center" id="Expiry_heading_span">
+                                 <span class="font-weight-bold">Expiry</span>
+                              </div>
+                              <div class="pt-1 px-0 row d-flex justify-content-center" id="Expiry_dropdown">
+                                 <select class="px-0 bg-faint rounded" id="Expiry" style="width: 145px;">
+                                    <option id="1st_dropdown_value" value=""></option>
+                                    <option id="2nd_dropdown_value" value=""></option>
+                                 </select>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- Grouped Bar Chart -->
+               <div class="nifty_banknifty row my-2 mx-2">
+                  <div class="col-lg-8 rounded bg-color px-2">
+                     <div class="mx-2 row text-light font-weight-bold p-2 py-3 border-faint">
+                        <div class="col">
+                           <span class="h3">OI Compass</span>
+                        </div>
+                     </div>
+                     <div class="dataTableContainer1">
+                        <div id="blur-background" class="d-none blur-background"></div>
+                        <div class="me-3" id="grouped_barchart"></div>
+                        <div id="lock-icon" class="d-none lock-icon">
+                           <div class="row d-flex justify-content-center">
+                              <i class="fa-solid fa-lock fa-5x"></i>
+                           </div>
+                           <div class="row">
+                              <span class="mt-2 text-center" style="font-weight: bold; font-size: 22px;">Only for
+                                 TCI students</span>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-4 rounded ps-2 pe-0" id="strech_me" style="height:100%; width: 33.3%;"
+                     name="strech me on lg-breakpoint">
+                     <div class="dataTableContainer">
+                        <div id="blur-background" class="d-none blur-background"></div>
+                        <div class="row border-faint bg-color rounded-top h-40">
+                           <div id="donutchart" class="col-sm-7 col-12 donutchart"></div>
+                           <div class="col-sm-5 col-12 text-light m-auto text-center">
+                              <div class="row">
+                                 <div class="col-12 mt-1 p-0 mb-2">
+                                    <span class="text-light font-weight-normal h3">Change in P/C </span>
+                                 </div>
+                                 <div class="col-12 Laptop_View">
+                                    <div class="cust_legend_heading h4" id="cust_legend_1_1">
+                                       <i class="fa-solid fa-circle fa-2xs"></i> Change PE OI
+                                    </div>
+                                    <div class="my-2">
+                                       <span class="cust_legend_value chg_pe h4">0</span>
+                                    </div>
+                                 </div>
+                                 <div class="col-12 Laptop_View">
+                                    <div class="cust_legend_heading h4" id="cust_legend_1_2">
+                                       <i class="fa-solid fa-circle fa-2xs"></i> Change CE OI
+                                    </div>
+                                    <div class="my-2">
+                                       <span class="cust_legend_value chg_ce h4">0</span>
+                                    </div>
+                                 </div>
+                                 <div class="col-12 Mobile_View">
+                                    <div class="row">
+                                       <div class="col-6">
+                                          <div class="cust_legend_heading h4" id="cust_legend_1_1">
+                                             <i class="fa-solid fa-circle fa-2xs"></i> Change PE OI
+                                          </div>
+                                          <div class="my-2">
+                                             <span class="cust_legend_value chg_pe h4">0</span>
+                                          </div>
+                                       </div>
+                                       <div class="col-6">
+                                          <div class="cust_legend_heading h4" id="cust_legend_1_2">
+                                             <i class="fa-solid fa-circle fa-2xs"></i> Change CE OI
+                                          </div>
+                                          <div class="my-2">
+                                             <span class="cust_legend_value chg_ce h4">0</span>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row bg-color rounded-bottom h-40">
+                           <div id="donutchart1"
+                              class="col-sm-7 col-12 donutchart d-flex align-items-center justify-content-center"></div>
+                           <div class="col-sm-5 col-12 text-light m-auto text-center">
+                              <div class="row">
+                                 <div class="col-12 mt-1 mb-2 p-0">
+                                    <span class="text-light font-weight-normal mb-1 h3">P/C Ratio Net</span>
+                                 </div>
+                                 <div class="col-12 Laptop_View">
+                                    <div class="cust_legend_heading h4" id="cust_legend_2_1">
+                                       <i class="fa-solid fa-circle fa-2xs" style="color:#00d3c0"></i> Total PE OI
+                                    </div>
+                                    <div class="my-2">
+                                       <span class="cust_legend_value total_pe h4">0</span>
+                                    </div>
+                                 </div>
+                                 <div class="col-12 Laptop_View">
+                                    <div class="cust_legend_heading h4" id="cust_legend_2_2">
+                                       <i class="fa-solid fa-circle fa-2xs" style="color:#ff5253"></i> Total CE OI
+                                    </div>
+                                    <div class="my-2">
+                                       <span class="cust_legend_value total_ce h4">0</span>
+                                    </div>
+                                 </div>
+                                 <div class="col-12 Mobile_View">
+                                    <div class="row">
+                                       <div class="col-4 px-0">
+                                          <div class="cust_legend_heading h4" id="cust_legend_2_1">
+                                             <i class="fa-solid fa-circle fa-2xs" style="color:#00d3c0"></i> Total PE OI
+                                          </div>
+                                          <div class="my-2">
+                                             <span class="cust_legend_value total_pe h4">0</span>
+                                          </div>
+                                       </div>
+                                       <div class="col-4 px-0">
+                                          <div class="cust_legend_heading h4" id="cust_legend_2_2">
+                                             <i class="fa-solid fa-circle fa-2xs" style="color:#ff5253"></i> Total CE OI
+                                          </div>
+                                          <div class="my-2">
+                                             <span class="cust_legend_value total_ce h4">0</span>
+                                          </div>
+                                       </div>
+                                       <div class="col-4 px-0">
+                                          <div class="mt-3 my-2">
+                                             <span class="cust_legend_value_2 h4"><b style="color:#6C7383">PCR:</b> <b
+                                                   class="h3 pcr_net"></b></span>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-12 Laptop_View">
+                                    <div class="mt-3 my-2">
+                                       <span class="cust_legend_value_2 h4"><b style="color:#6C7383">PCR:</b> <b
+                                             class="h3 pcr_net"></b></span>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div id="lock-icon" class="d-none lock-icon">
+                           <div class="row d-flex justify-content-center">
+                              <i class="fa-solid fa-lock fa-5x"></i>
+                           </div>
+                           <div class="row">
+                              <span class="mt-2 text-center" style="font-weight: bold; font-size: 22px;">Only for
+                                 TCI students</span>
+                           </div>
+                        </div>
+                     </div>
+
+                  </div>
+               </div>
+               <!-- Column Chart -->
+               <div class="nifty_banknifty row mt-4 my-2 mx-2">
+                  <div class="col-lg-12 bg-color rounded" style="min-height: 550px;">
+                     <div class="text-light pt-3 pb-1 col_barchart_name">
+                        <span class="h3 px-2" id="col_barchart_name">Nifty 50 Open Interest
+                           Tracker</span> <a class="live"><i class="fa-solid fa-circle fa-sm"></i>&nbsp;ACTIVE</a>
+                     </div>
+                     <!-- <div class="text-light px-2">
+                        Last Updated: <small id="c_chart_last_upd"></small>
+                     </div> -->
+                     <div class="dataTableContainer">
+                        <div id="blur-background" class="d-none blur-background"></div>
+                        <div class="" id="column_chart"></div>
+                        <div id="lock-icon" class="d-none lock-icon">
+                           <div class="row d-flex justify-content-center">
+                              <i class="fa-solid fa-lock fa-5x"></i>
+                           </div>
+                           <div class="row">
+                              <span class="mt-2 text-center" style="font-weight: bold; font-size: 22px;">Only for
+                                 TCI students</span>
+                           </div>
+                        </div>
+                     </div>
+
+                  </div>
+               </div>
+            </div>
+
+            <div class="row mt-5 pt-5 mx-5 px-5 mb-2" id="finnifty_body_row" style="display: none;">
+               <div class="px-5 mt-5 pt-5 col-12 rounded text-center" id="finnifty_body_col">
+                  <span class="text-white" style="font-size: xxx-large; font-weight: bolder;" id="span_text_for_unauth">
+                     Get FinNifty and other features for Free by opening Dhan account using our link
+                  </span>
+                  <div class="d-flex justify-content-center my-5">
+                     <!-- <a href="/trade-with-tredcode"><span class="tooltip_1">>> Trade with Tredcode</span></a> -->
+                     <a href="/trade-with-tredcode" role="button" class="btn btn-lg btn-secondary"
+                        id="check_access_button_1" style="font-weight: bold; text-decoration: underline;">>> Trade with
+                        Tredcode</a>
+                  </div>
+               </div>
+            </div>
+
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="text-center bg-color1 border-radius-10">
+                     <div class="swing-heading">
+                        <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed"
+                           data-ad-client="ca-pub-6938710509021107" data-ad-slot="1655501713"></ins>
+                        <script>
+                           (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="chat_slide_wrapper">
+               <div class="fixed_updates_window text-light bg-color">
+                  <div class="fixed_updates_window_head font-weight-bold">
+                     <div class="h-100 d-flex align-items-center">
+                        <div class="">Updates &nbsp;<i class="fa-solid fa-message"></i></div>
+                        <div class="ml-auto" onclick="toggle_updates_window(true)">X</div>
+                     </div>
+                  </div>
+                  <div class="dataTableContainer">
+                     <div id="blur-background" class="d-none blur-background"></div>
+                     <div class="fixed_updates_window_body">
+                     </div>
+                     <div id="lock-icon" class="d-none lock-icon">
+                        <div class="row d-flex justify-content-center">
+                           <i class="fa-solid fa-lock fa-5x"></i>
+                        </div>
+                        <div class="row">
+                           <span class="mt-2 text-center" style="font-weight: bold; font-size: 16px;">Only for TCI
+                              students</span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="fixed_updates_btn shadow">
+                  <button class="bg-color text-light" id="updates_btn" onclick="toggle_updates_window()"><img
+                        src="img/msg.png" width="25" height="25"></button>
+               </div>
+
+               <div class="top_arrow bg-color" onclick="$('html, body').animate({ scrollTop: 0 }, 'slow');">
+                  <i class="fa-solid fa-angles-up" style="color: #fff;"></i>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- main-panel ends -->
+   </div>
+
+   <footer class="footer">
+      <div class="row">
+         <div class="col-md-12">
+            2023 © TredCode. All Rights Reserved
+         </div>
+         <div class="col-12 font-weight-bold mt-1">
+            <a href="/disclaimer">Our Terms and Conditions</a>
+         </div>
+      </div>
+   </footer>
+
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7771336524545257"
+      crossorigin="anonymous"></script>
+
+   <!-- Google tag (gtag.js) -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCHQ1VC2VL"></script>
+   <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+
+      gtag('config', 'G-NCHQ1VC2VL');
+   </script>
+
+   <!-- Jquery CDN -->
+   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+   <script src="js/jquery_3.7.0.js"></script>
+
+   <!-- Bootstrap bundle -->
+   <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"></script> -->
+   <script src="js/bootstrap.bundle.min.js"></script>
+
+   <!-- Apexchart -->
+   <!-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> -->
+   <script src="js/apexcharts.js"></script>
+
+   <!-- Moment.JS -->
+   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script> -->
+   <script src="js/moment.min.js"></script>
+
+   <!-- Plugin JavaScript file (Range Slider)-->
+   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script> -->
+   <script src="js/ion.rangeSlider.min.js"></script>
+
+   <!-- JWT Decode-->
+   <!-- <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script> -->
+   <script src="js/jwt_decode.js"></script>
+
+   <!-- Font Awesome -->
+   <script src="js/all.min.js"></script>
+
+   <!-- Manual Jquery -->
+
+   <script>
+      $(window).on("resize", function () {
+         if ($(window).width() < 1075) {
+            finnifty_btn_text = $('#finnifty_btn').text()
+            if (finnifty_btn_text == '>> GET FINNIFTY') { $('#finnifty_btn').html('>> GET <br> FINNIFTY') }
+            midcap_btn_text = $('#midcap_btn').text()
+            if (midcap_btn_text == '>> GET MIDCAP') { $('#midcap_btn').html('>> GET <br> MIDCAP') }
+            sensex_btn_text = $('#sensex_btn').text()
+            if (sensex_btn_text == '>> GET SENSEX') { $('#sensex_btn').html('>> GET <br> SENSEX') }
+         } else if ($(window).width() > 1075) {
+            finnifty_btn_text = $('#finnifty_btn').html()
+            if (finnifty_btn_text == '&gt;&gt; GET <br> FINNIFTY') { $('#finnifty_btn').text('>> GET FINNIFTY') }
+            midcap_btn_text = $('#midcap_btn').html()
+            if (midcap_btn_text == '&gt;&gt; GET <br> MIDCAP') { $('#midcap_btn').text('>> GET MIDCAP') }
+            sensex_btn_text = $('#sensex_btn').html()
+            if (sensex_btn_text == '&gt;&gt; GET <br> SENSEX') { $('#sensex_btn').text('>> GET SENSEX') }
+         }
+      })
+   </script>
+
+   <script src="js/gg.min.js"></script>
+   <script src="js/vertical_navbar_js.js"></script>
+   <script src="js/index_analysis.js"></script>
+
+</body>
+
+</html>

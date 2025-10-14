@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"> -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap_5.3.css">
+
+    <!-- jquery CDN-->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script> -->
+    <script src="js/jquery_3.6.3.js"></script>
+
+    <title>Tredcode</title>
+
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/aos.css">
+    <link rel="stylesheet" type="text/css" href="css/boxicons.min.css">
+    <link rel="stylesheet" type="text/css" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/icofont@1.0.0/dist/icofont.min.css" rel="stylesheet">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7771336524545257"
+     crossorigin="anonymous"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCHQ1VC2VL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-NCHQ1VC2VL');
+    </script>
+
+    <!-- <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script> -->
+    <script src="js/lottie_player.js"></script>
+
+    <link rel="icon" href="img/Tredcode_logo.png" sizes="32x32" />
+    <link rel="icon" href="img/Tredcode_logo.png" sizes="192x192" />
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- <script src="https://unpkg.com/jwt-decode/build/jwt-decode.js"></script> -->
+    <script src="js/jwt_decode.js"></script>
+
+    <script>
+        api_url = ""
+
+        function onSignIn(response) {
+            // console.log(response)
+            const responsePayload = jwt_decode(response.credential);
+
+            var email = responsePayload.email
+            console.log(response.credential)
+            console.log(response)
+            // return
+            cred = response.credential
+            JWT_cred = jwt_decode(cred)
+            Profile_Img = JWT_cred['picture']
+            // console.log("Email: " + profile.getEmail());
+
+            $.post(api_url + "/auth", { g_token: cred }, function (data, status) {
+                console.log("Data: " + data + "\nStatus: " + status);
+                if (data == "success") {
+                    window.location.replace("/home");
+                }
+
+                else {
+                    // alert("User not Authenticated, Please Contact us for Access")
+                    toastList.forEach(toast => toast.show());
+                    setTimeout(() => {
+                        toastList.forEach(toast => toast.hide());
+                    }, 3000);
+                    console.log("Error in authentication")
+                }
+            });
+        }
+    </script>
+
+    <style id="wp-custom-css">
+        .media-presence {
+            background: #ffffff;
+            padding: 40px 0 80px;
+        }
+
+        .logo-wrap {
+            background: #FFFFFF;
+            box-shadow: 5px 4px 28px rgba(112, 119, 133, 0.15);
+            border-radius: 15px;
+            padding: 40px 10px;
+            margin-bottom: 50px;
+        }
+
+        .logo-wrap ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-align: center;
+        }
+
+        .logo-wrap ul li {
+            display: inline-block;
+            width: 11%;
+            margin: 0 1%;
+        }
+
+        .logo-wrap ul li img {
+            width: 100%;
+        }
+
+        .header-head {
+            width: 100%;
+            padding: 50px 0;
+        }
+
+        .header-head h3 {
+            font-family: 'Outfit';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 36px;
+            line-height: 50px;
+            color: #181818;
+            text-transform: capitalize;
+        }
+
+        .video_main {
+            width: 100%;
+            text-align: center;
+            justify-content: center;
+            float: left;
+            display: inline-table;
+        }
+
+        .video_main .item {
+            width: 25%;
+            max-width: 25%;
+            display: inline-block;
+            padding: 12px 6px;
+        }
+
+        @media (max-width: 992px) {
+            .video_main .item {
+                width: 50%;
+                max-width: 50%;
+            }
+        }
+
+        .prevent-select {
+            -webkit-user-select: none;
+            /* Safari */
+            -ms-user-select: none;
+            /* IE 10 and IE 11 */
+            user-select: none;
+            /* Standard syntax */
+        }
+
+        /* Set the video as a background */
+        #video-bg {
+            top: 0;
+            left: 0;
+            z-index: -1;
+            height: auto;
+            width: 100%;
+        }
+
+        /* Hide the video controls */
+        #video-bg::-webkit-media-controls {
+            display: none !important;
+        }
+
+        #video-bg::-webkit-media-controls-enclosure {
+            display: none !important;
+        }
+
+        #video-bg::-webkit-media-controls-overlay-play-button {
+            display: none !important;
+        }
+    </style>
+
+    <style>
+        .toast.align-items-center.bg-danger,
+        .toast-header.bg-danger {
+            background-color: #ff8a8a !important;
+        }
+
+        .toast.align-items-center.bg-danger.text-danger,
+        .toast-header.bg-danger.text-danger {
+            color: #712525 !important;
+        }
+    </style>
+
+    <style>
+        #Logo_Heading {
+            color: white;
+            font-family: Outfit;
+            font-weight: 500;
+            font-size: 24px;
+        }
+
+        @media (max-width:450px) {
+            #Logo_Heading {
+                font-size: 20px;
+                margin-left: 0px !important;
+            }
+
+            #header_div {
+                padding-right: 0 !important;
+                padding-left: 5px !important;
+            }
+
+            .mobile-nav-toggle {
+                right: 1px;
+            }
+
+            .get-started-btn {
+                margin-right: 40px;
+            }
+        }
+
+        @media (max-width:375px) {
+            #Logo_Heading {
+                font-size: 18px;
+            }
+
+            .get-started-btn {
+                padding: 5px;
+                margin-right: 37px;
+            }
+        }
+    </style>
+
+    <style>
+        @media (max-width:992px) {
+            #main_center_image {
+                width: 100% !important;
+            }
+
+            #quotes_image {
+                width: 30% !important
+            }
+        }
+
+        /* .nsm7Bb-HzV7m-LgbsSe,
+        .nsm7Bb-HzV7m-LgbsSe-MJoBVe {
+            border-radius: 7px !important;
+            background-color: #1c1c1c !important;
+            color: #b5b5b5 !important;
+            height: 50px !important
+        } */
+
+        @media (max-width:375px) {
+            #new_user {
+                margin-left: 5px !important;
+                padding: 12px 10px 0 10px !important;
+            }
+        }
+
+        #new_user {
+            padding-top: 12px !important;
+        }
+    </style>
+</head>
+
+<body style="font-family: 'Outfit', sans-serif;">
+
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center" id="header_div">
+            <a href="#" class="logo mr-auto">
+                <img src="img/Tredcode_logo.png" alt="" class="img-fluid">
+                <span id="Logo_Heading" class="ms-3">TCI Trading Journal</span>
+            </a>
+            <nav class="nav-menu d-none d-lg-block">
+                <ul>
+                    <li class="active"><a href="#WhatOur">Testimonial</a></li>
+                    <!-- <li><a href="#services">Features</a></li> -->
+                </ul>
+            </nav>
+            <a href="https://tradingcafeindia.com/" class="get-started-btn scrollto">Home</a>
+        </div>
+    </header>
+    <button type="button" class="mobile-nav-toggle d-lg-none"><i class="icofont-navigation-menu"></i></button>
+    <nav class="mobile-nav d-lg-none">
+        <ul>
+            <li><a href="#WhatOur">Testimonial</a></li>
+            <!-- <li><a href="#services">Features</a></li> -->
+        </ul>
+    </nav>
+    <div class="mobile-nav-overly" style="display: none;"></div>
+
+    <section id="hero" class="hero d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 d-flex justify-content-center">
+                    <img src="img/front_Graphic.png" id="main_center_image" width="60%">
+                </div>
+            </div>
+            <div class="mt-3 row">
+                <div class="d-flex justify-content-center">
+                    <div class="d-flex d-inline-flex">
+                        <div id="g_id_onload"
+                            data-client_id="256759331803-l4q84jqdcnhuu5aevgtee6v5l6v4oi8m.apps.googleusercontent.com"
+                            data-callback="onSignIn"></div>
+                        <div class="g_id_signin" data-type="standard"></div>
+                    </div>
+                    <!-- <a href="#" class="m-0 me-3 get-started-btn scrollto d-flex justify-content-center" style="cursor: pointer;">Login</a> -->
+                    <a href="https://www.tradingcafeindia.in/trading-journal-access" id="new_user"
+                        class="m-0 ms-3 get-started-btn scrollto d-flex justify-content-center"
+                        style="cursor: pointer;">New User</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container-fluid" id="About_Tredcode" style="background-color: rgb(14,14,14);">
+        <div class="py-3 container-xxl">
+            <div class="my-5 pt-5 heading text-center">
+                <span style="font-weight: bold;font-size:26px; color:white">Discover your strengths and weaknesses with
+                    the <br> power of journaling and be a consistent trader</span>
+            </div>
+            <div class="my-5 row py-5">
+                <div class="col-lg-6">
+                    <img src="img/trading_journal_1.png" width="100%" height="100%"
+                        style="box-shadow: 0 0 5px 5px rgb(14,14,14);" />
+                </div>
+                <div class="col-lg-6">
+                    <div class="ms-5 pt-5 img_description_bold text-left" style="color:#5271ff">
+                        <span style="font-weight: bold">Tradebook:</span>
+                    </div>
+                    <div class="my-3 ms-5 img_description text-left">
+                        <span style="font-weight: normal; color:white">Explore your daily profits and losses
+                            effortlessly with our Tradebook feature. Track your trading performance, day by day, month
+                            by month, enabling you to make informed decisions based on your trading history.
+
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="py-5 my-5 row" id="second_row">
+                <div class="col-lg-6">
+                    <div class="me-5 img_description_bold text-left" style="color:#5271ff;padding-top: 75px;">
+                        <span style="font-weight: bold;">Last Month's All Trades:</span>
+                    </div>
+                    <div class="my-3 me-5 img_description text-left">
+                        <span style="font-weight: normal;color:white">Reflect on your recent trades in one convenient
+                            place. Analyze and review all your trades from the current month, gaining valuable insights
+                            into your trading patterns and trends for strategic improvements.
+
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="img/trading_journal_2.png" width="100%" height="100%"
+                        style="box-shadow: 0 0 5px 5px rgb(14,14,14);" />
+                </div>
+            </div>
+            <div class="my-5 row py-5">
+                <div class="col-lg-6">
+                    <img src="img/trading_journal_3.png" width="100%" height="100%"
+                        style="box-shadow: 0 0 5px 5px rgb(14,14,14);" />
+                </div>
+                <div class="col-lg-6">
+                    <div class="ms-5 pt-5 img_description_bold text-left" style="color:#5271ff">
+                        <span style="font-weight: bold">Statistics:</span>
+                    </div>
+                    <div class="my-3 ms-5 img_description text-left">
+                        <span style="font-weight: normal;color:white">Dive into comprehensive statistics detailing your
+                            trading journey. Discover key metrics such as total profit and loss, total trades executed,
+                            biggest wins and losses, and average risk-to-reward ratios. Empower your trading strategy
+                            with data-driven decisions.
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="py-5 my-5 row" id="fourth_row">
+                <div class="col-lg-6">
+                    <div class="me-5 img_description_bold text-left" style="color:#5271ff">
+                        <span style="font-weight: bold">All Trade List:</span>
+                    </div>
+                    <div class="my-3 me-5 img_description text-left">
+                        <span style="font-weight: normal;color:white">A treasure trove of insights from your entire
+                            trading journey. Review and analyze all your trades throughout the year. Understand the
+                            reasons behind each trade, identify mistakes, and highlight areas for improvement. Your
+                            trading wisdom grows with every click.
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="img/trading_journal_4.png" width="100%" height="100%"
+                        style="box-shadow: 0 0 5px 5px rgb(14,14,14);" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" id="About_Tredcode_Mobile_View" style="background-color: rgb(14,14,14);">
+        <div class="px-0 container-xxl">
+            <span class="prevent-select" style="color: rgb(14,14,14)">TCI-Tredcode</span>
+            <div class="mt-4 heading text-center">
+                <span style="font-weight: bold;font-size:20px; color:white">Discover your strengths and weaknesses with
+                    the power of journaling and be a consistent trader</span>
+            </div>
+            <div class="my-5 row pb-5">
+                <div class="col-lg-6">
+                    <img src="img/trading_journal_1.png" width="100%" height="100%"
+                        style="  box-shadow: 0 0 5px 5px rgb(14,14,14);" />
+                </div>
+                <div class="col-lg-6">
+                    <div class="ms-5 img_description_bold text-left" style="color:#5271ff">
+                        <span style="font-weight: bold">Tradebook:</span>
+                    </div>
+                    <div class="ms-5 img_description text-left">
+                        <span style="font-weight: normal; color:white">Explore your daily profits and losses
+                            effortlessly with our Tradebook feature. Track your trading performance, day by day, month
+                            by month, enabling you to make informed decisions based on your trading history.
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="py-5 my-5 row" id="second_row">
+                <div class="col-lg-6">
+                    <img src="img/trading_journal_2.png" width="100%" height="100%"
+                        style=" box-shadow: 0 0 5px 5px rgb(14,14,14);" />
+                </div>
+                <div class="col-lg-6">
+                    <div class="ms-5 img_description_bold text-left" style="color:#5271ff">
+                        <span style="font-weight: bold">Last Month's All Trades:</span>
+                    </div>
+                    <div class="ms-5 img_description text-left">
+                        <span style="font-weight: normal; color:white">Reflect on your recent trades in one convenient
+                            place. Analyze and review all your trades from the current month, gaining valuable insights
+                            into your trading patterns and trends for strategic improvements.
+
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="my-5 row py-5">
+                <div class="col-lg-6">
+                    <img src="img/trading_journal_3.png" width="100%" height="100%"
+                        style=" box-shadow: 0 0 5px 5px rgb(14,14,14);" />
+                </div>
+                <div class="col-lg-6">
+                    <div class="ms-5 img_description_bold text-left" style="color:#5271ff">
+                        <span style="font-weight: bold">Statistics:</span>
+                    </div>
+                    <div class="ms-5 img_description text-left">
+                        <span style="font-weight: normal; color:white">Dive into comprehensive statistics detailing your
+                            trading journey. Discover key metrics such as total profit and loss, total trades executed,
+                            biggest wins and losses, and average risk-to-reward ratios. Empower your trading strategy
+                            with data-driven decisions.
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="py-5 my-5 row" id="fourth_row">
+                <div class="col-lg-6">
+                    <img src="img/trading_journal_4.png" width="100%" height="100%"
+                        style=" box-shadow: 0 0 5px 5px rgb(14,14,14);" />
+                </div>
+                <div class="col-lg-6">
+                    <div class="ms-5 img_description_bold text-left" style="color:#5271ff">
+                        <span style="font-weight: bold">All Trade List:</span>
+                    </div>
+                    <div class="ms-5 img_description text-left">
+                        <span style="font-weight: normal; color:white">A treasure trove of insights from your entire
+                            trading journey. Review and analyze all your trades throughout the year. Understand the
+                            reasons behind each trade, identify mistakes, and highlight areas for improvement. Your
+                            trading wisdom grows with every click.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main id="main">
+
+        <section id="WhatOur" class="WhatOur">
+            <div class="container aos-init aos-animate" data-aos="fade-up">
+                <div class="row content">
+                    <div class="col-lg-3">
+                        <div class="whatsection-title">
+                            <h2 style="color:black"> What Our Users Say</h2>
+                            <p style="color:black">We are happy when our customers are happy</p>
+                        </div>
+                        <img src="img/left-icon.png" class="img-fluid" alt="" id="quotes_image">
+                    </div>
+                    <div class="col-lg-9 pt-4 pt-lg-0">
+                        <div class="owl-carousel testimonials-carousel owl-loaded owl-drag">
+                            <div class="owl-stage-outer">
+                                <div class="owl-stage"
+                                    style="transform: translate3d(-2130px, 0px, 0px); transition: all 0.25s ease 0s; width: 4260px;">
+                                    <div class="owl-item cloned" style="width: 335px; margin-right: 20px;">
+                                        <div class="testimonial-item aos-init aos-animate" data-aos="fade-up">
+                                            <img src="img/Karan_Mandal.png" class="testimonial-img" alt="">
+                                            <div class="testimonial-header">
+                                                <p>“I used to make the same mistakes over and over. Tredcode has helped
+                                                    me spot my weaknesses, and now I'm trading smarter, not harder. Ever
+                                                    since I started using Tredcode Trading Journal, my trades have
+                                                    become more disciplined. It's like having a personal coach that
+                                                    helps me refine my strategy.”</p>
+                                            </div>
+                                            <div class="testimonial-footer">
+                                                <h3>Karan Mandal</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item cloned" style="width: 335px; margin-right: 20px;">
+                                        <div class="testimonial-item aos-init aos-animate" data-aos="fade-up">
+                                            <img src="img/Arpit_Prasad.png" class="testimonial-img" alt="">
+                                            <div class="testimonial-header">
+                                                <p>“The user interface is friendly, and the data analytics are
+                                                    incredibly helpful. Tredcode has fundamentally changed how I
+                                                    approach trading. I can't imagine going back to the days when I
+                                                    traded without it. My performance has been consistently improving.”
+                                                </p>
+                                            </div>
+                                            <div class="testimonial-footer">
+                                                <h3>Arpit Prasad</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item cloned" style="width: 335px; margin-right: 20px;">
+                                        <div class="testimonial-item aos-init aos-animate" data-aos="fade-up">
+                                            <img src="img/Kalpesh_Mishra.png" class="testimonial-img" alt="">
+                                            <div class="testimonial-header">
+                                                <p>“I love the insights this journal provides. From trend analysis to
+                                                    profit and loss summaries, Tredcode offers everything you need to be
+                                                    a successful trader.”</p>
+                                            </div>
+                                            <div class="testimonial-footer">
+                                                <h3>Kalpesh Mishra</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 335px; margin-right: 20px;">
+                                        <div class="testimonial-item aos-init aos-animate" data-aos="fade-up">
+                                            <img src="img/Piyush_Nath.png" class="testimonial-img" alt="">
+                                            <div class="testimonial-header">
+                                                <p>“Thanks to Tredcode, I can now easily track my performance and
+                                                    understand my trading patterns. It's a game-changer for anyone
+                                                    serious about making money in trading. Tredcode Trading Journal is
+                                                    comprehensive yet simple. Perfect!”</p>
+                                            </div>
+                                            <div class="testimonial-footer">
+                                                <h3>Piyush Nath</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 335px; margin-right: 20px;">
+                                        <div class="testimonial-item aos-init aos-animate"
+                                            style="background-color:#e3f2ff;" data-aos="fade-up">
+                                            <img src="img/Tirth_More.png" class="testimonial-img" alt="">
+                                            <div class="testimonial-header">
+                                                <p>“By tracking my successful trades and understanding my failures,
+                                                    Tredcode has given me the confidence to make bolder, smarter
+                                                    decisions. Tredcode takes the guesswork out of trading. The platform
+                                                    allows you to learn from both your triumphs and your slip-ups,
+                                                    ensuring that you're always progressing.”</p>
+                                            </div>
+                                            <div class="testimonial-footer">
+                                                <h3>Tirth More</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 335px; margin-right: 20px;">
+                                        <div class="testimonial-item aos-init aos-animate"
+                                            style="background-color:#e3f2ff;" data-aos="fade-up">
+                                            <img src="img/Dave_Mohanty.png" class="testimonial-img" alt="">
+                                            <div class="testimonial-header">
+                                                <p>“I used to think I could keep track of everything in my head. Boy,
+                                                    was I wrong! Tredcode has been invaluable in ironing out the rookie
+                                                    mistakes I didn't even know I was making. If you're serious about
+                                                    trading, you can't afford NOT to use Tredcode Trading Journal. It's
+                                                    helped me identify areas for improvement and maximize my
+                                                    trading potential”</p>
+                                            </div>
+                                            <div class="testimonial-footer">
+                                                <h3>Dave Mohanty</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="media-presence">
+            <div class="container-xxl">
+                <div class="container">
+                    <div class="row justify-content-center text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="col-lg-8 col-sm-8 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="header-head">
+                                <h3>Our Media Presence</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-lg-12 col-md-12 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="logo-wrap">
+                                <ul>
+                                    <li><a
+                                            href="https://www.outlookindia.com/website/story/outlook-spotlight-beginner-stock-market-traders-find-their-way-to-profitability-with-trading-cafe-india/395384">
+                                            <img src="img/logo-s1.png"></a>
+                                    </li>
+                                    <li><a
+                                            href="https://m.dailyhunt.in/news/india/english/clout+news-epaper-dhc9d1a4a4c05c48768e5ceb1997c3d6ff/indias+top+stock+market+community+trading+cafe+india+busts+the+myths+about+share+bazaar-newsid-dhc9d1a4a4c05c48768e5ceb1997c3d6ff_4858b6b01c8e11ecb6ffc63dce291935?s=a&amp;ss=pd">
+                                            <img src="img/logo-s2.png"></a>
+                                    </li>
+                                    <li><a
+                                            href="https://www.deccanherald.com/brandspot/pr-spot/trading-cafe-india-has-trained-over-1000-profitable-traders-with-their-winning-strategies-1033520.html">
+                                            <img src="img/logo-s3.png"></a>
+                                    </li>
+                                    <li><a
+                                            href="https://www.hindustantimes.com/brand-post/trading-cafe-india-unveiling-the-new-world-of-trading-101627476865827.html">
+                                            <img src="img/logo-s4.png"></a>
+                                    </li>
+                                    <li><a
+                                            href="https://www.business-standard.com/content/specials/making-trading-an-accessible-career-the-dream-of-pro-mentors-at-trading-cafe-india-121090600443_1.html">
+                                            <img src="img/logo-s5.png"></a>
+                                    </li>
+                                    <li><a
+                                            href="https://www.zeebiz.com/companies/news-trading-cafe-india-one-of-the-finest-retail-prop-trading-desks-of-the-country-165755">
+                                            <img src="img/logo-s6.png"></a>
+                                    </li>
+                                    <li><a
+                                            href="https://www.ibtimes.sg/trading-cafe-india-proves-attaining-financial-freedom-possible-through-stock-market-60323">
+                                            <img src="img/logo-s7.png"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div class="toast align-items-center bg-danger text-danger" id="toast-alert" role="alert" aria-live="assertive"
+            aria-atomic="true">
+            <div class="toast-header bg-danger text-danger" id="toast-alert-heading">
+                <strong class="me-auto" style="font-size: 16px;" id="Header_toast_message"><i
+                        class="fa-solid fa-circle-exclamation"></i>Warning</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="d-flex">
+                <div class="toast-body toast-body_1" style="font-weight: 400; font-size: 22px; padding: 0.5rem;">User
+                    not Authenticated, Please Contact us
+                    for Access
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer">
+        <div class="container d-md-flex py-3 justify-content-center">
+            <div class=" text-center text-md-left">
+                <div class="copyright">
+                    2023 © TredCode. All Rights Reserved
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top" style="display: inline;"><i class="ri-arrow-up-line"></i></a>
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script> -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript -->
+    <script src="js/aos.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/all.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/icofont@1.0.0/main.min.js"></script>
+
+    <!-- <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script> -->
+    <script src="js/boxicons.js"></script>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"
+        integrity="sha512-0QbL0ph8Tc8g5bLhfVzSqxe9GERORsKhIn1IrpxDAgUsbBGz/V7iSav2zzW325XGd1OMLdL4UiqRJj702IeqnQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script src="js/jquery.easing.min.js"></script>
+
+
+    <script src="js/index.js"></script>
+
+    <script>
+        $("body").on("keyup", function (e) {
+            if (e.which === 27) {
+                return false;
+            }
+        });
+        $(document).ready(function () {
+            const toastElList = document.querySelectorAll('#toast-alert')
+            const toastoptions = {
+                animation: true,
+                delay: 5000 // This is just an example, you can adjust the delay as needed
+            };
+            toastList = [...toastElList].map(toastEl => new bootstrap.Toast(toastEl, toastoptions))
+
+            var curr_url = window.location.href
+            if (curr_url.includes("https://tredcode.com")) { window.location.replace('https://tredcode.tradingcafeindia.com') }
+
+            $('#close').click(function () {
+                $('.lightbox-column').empty()
+                $('.lightbox').hide()
+            })
+
+        })
+    </script>
+
+</body>
+
+</html>
