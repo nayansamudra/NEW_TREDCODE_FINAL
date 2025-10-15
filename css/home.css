@@ -83,3 +83,50 @@ h4:hover {
     width: 50px !important;
   }
 }
+
+
+.tradefinder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.offerFiftyPercent {
+  backdrop-filter: blur(5px) saturate(150%);
+  border-radius: 10px;
+  border: 3px solid #ffa220;
+  box-shadow: inset 0 0 20px rgba(243, 185, 60, 0.926), inset 0 0 10px rgba(255, 200, 82, 0.893);
+  color: white;
+}
+
+.payButton {
+  color: #111;
+  padding: 10px 20px;
+  border-radius: 30px;
+  background: linear-gradient(115deg, #F2B253, #ff9500, #ffd190);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (max-width: 470px) {
+  .offerFiftyPercent {
+    padding: 25px !important;
+  }
+}
+
+.offerFiftyPercent h1 {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
