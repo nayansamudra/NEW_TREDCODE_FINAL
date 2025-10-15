@@ -73,3 +73,13 @@ h4:hover {
     -webkit-mask-position: 0 0
   }
 }
+
+@media (max-width: 460px) {
+  .activePlan h1 span {
+    font-size: 20px !important;
+  }
+
+  .activePlan h1 img {
+    width: 50px !important;
+  }
+}

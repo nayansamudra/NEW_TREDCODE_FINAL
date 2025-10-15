@@ -208,12 +208,14 @@
                            Don't miss out!
                         </div>
                      </div>
-                     <div class="d-flex justify-content-center my-4" onclick="location.href='https://tradefinder.in/payments-tredcode'">
+                     <div class="d-flex justify-content-center my-4" id="payButtonContainer">
                         <div class="payButton">Get 50% discount ➔</div>
                      </div>
                   </div>
                </div>
             </div>
+
+            <iframe id="paymentFrame" style="display:none; width:100%; height:80dvh; border:none;"></iframe>
 
             <div class="row">
                <div class="col-md-12">
@@ -316,7 +318,28 @@
 
    <!-- Manual Jquery -->
    <script src="js/gg.min.js"></script>
-   <!-- <script src="js/vertical_navbar_js.js"></script> -->
+   <script src="js/vertical_navbar_js.js"></script>
+   <script>
+      $(document).ready(function () {
+         let email = username(cookieValue_1)
+         let EmailValue = email[0]
+
+         $("#payButtonContainer").on("click", function () {
+            // Build URL with query param
+            const iframeUrl = `https://tradefinder.in/payments-tredcode8421?${btoa(String(`email=${EmailValue}`))}`;
+
+            // Set the iframe src and show it
+            $("#paymentFrame").attr("src", iframeUrl).show();
+
+            // Scroll Into View
+            $("#paymentFrame")[0].scrollIntoView({
+               behavior: "smooth", // or "auto" or "instant"
+               block: "start" // or "end"
+            });
+
+         });
+      })
+   </script>
 </body>
 
 </html>
