@@ -335,13 +335,15 @@
                   aria-label="Close"></button>
             </div>
             <div class="modal-body bg-faint p-0">
-               <img src="img/Fireworks.gif" style="position: absolute; right: 0; bottom: 0;">
-               <div class="container-fluid tradefinder-container-fluid" style="color: #fff;">
+               <img src="img/Fireworks.gif" style="position: absolute; z-index: 0; right: 0; bottom: 0;">
+               <div class="container-fluid tradefinder-container-fluid"
+                  style="color: #fff; position: relative; z-index: 1;">
                   <div class="tradefinder pb-5">
                      <div class="offerFiftyPercent px-5 py-3">
                         <h1 class="mt-4 text-center" style="color: #F2B253;">Diwali Dhamaka Offer</h1>
                         <h4 class="text-center my-4">Get 50% OFF on TradeFinder Subscription this festive season!</h4>
-                        <div class="d-flex justify-content-center my-4" onclick="location.href='/tradefinder'">
+                        <div class="d-flex justify-content-center my-4" style="cursor: pointer;"
+                           onclick="location.href='/tradefinder'">
                            <div class="payButton">Hurry Now ➔</div>
                         </div>
                      </div>
