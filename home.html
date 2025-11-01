@@ -97,7 +97,7 @@
       <div class="main-panel">
          <div class="content-wrapper">
 
-            <!-- <div class="row">
+            <div class="row">
                <div class="col-md-12">
                   <div class="text-center bg-color1 border-radius-10">
                      <div class="swing-heading">
@@ -108,16 +108,6 @@
                         </script>
                      </div>
                   </div>
-               </div>
-            </div> -->
-
-            <div class="mb-4 row d-flex justify-content-center">
-               <div class="activePlan bg-color text-center col-md-4 col-md col-lg p-4 m-2 rounded"
-                  style="cursor:pointer;" onclick="location.href='/tradefinder'">
-                  <h1 class="mb-0" style="color: #F6E18A;">
-                     <img src="img/TG.png" width="70px" style="padding-right: 5px;">
-                     <span>Trade with TradeFinder</span>
-                  </h1>
                </div>
             </div>
 
@@ -326,34 +316,6 @@
       </div>
    </div>
 
-   <!-- Promotion Modal -->
-   <div class="modal fade" id="promotionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-md modal-dialog-centered">
-         <div class="modal-content bg-color border-0">
-            <div class="modal-header" style="border-bottom: none;">
-               <button type="button" class="btn-close bg-white close_modal" data-bs-dismiss="modal"
-                  aria-label="Close"></button>
-            </div>
-            <div class="modal-body bg-faint p-0">
-               <img src="img/Fireworks.gif" style="position: absolute; z-index: 0; right: 0; bottom: 0;">
-               <div class="container-fluid tradefinder-container-fluid"
-                  style="color: #fff; position: relative; z-index: 1;">
-                  <div class="tradefinder pb-5">
-                     <div class="offerFiftyPercent px-5 py-3">
-                        <h1 class="mt-4 text-center" style="color: #F2B253;">Diwali Dhamaka Offer</h1>
-                        <h4 class="text-center my-4">Get 50% OFF on TradeFinder Subscription this festive season!</h4>
-                        <div class="d-flex justify-content-center my-4" style="cursor: pointer;"
-                           onclick="location.href='/tradefinder'">
-                           <button class="payButton">Hurry Now ➔</button>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-
    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7771336524545257"
       crossorigin="anonymous"></script>
 
@@ -401,11 +363,6 @@
             $('.fixed_updates_window').remove()
             $('.fixed_updates_btn').remove()
          }
-
-         setTimeout(function () {
-            var myModal = new bootstrap.Modal(document.getElementById('promotionModal'));
-            myModal.show();
-         }, 1000);
       })
    </script>
 
