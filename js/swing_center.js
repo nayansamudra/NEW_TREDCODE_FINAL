@@ -306,26 +306,50 @@ $(document).ready(function () {
                     "url": root_1 + route_3 + '/10 DAY HIGH BO?count=5',
                     "type": "GET",
                     "dataType": 'json',
+                    "dataSrc": function (response) {
+                        if (!response || !Array.isArray(response.data)) {
+                            return [];
+                        }
+                        return response.data.map(item => {
+                            let updated = { ...item };
+                            // CASE: old / incorrect format
+                            // param_0 = percentage, param_1 = date
+                            if (updated.param_0 !== undefined && updated.param_1 !== undefined && updated.param_2 === undefined && updated.param_4 === undefined) {
+                                updated.param_2 = updated.param_0; // percentage
+                                updated.param_4 = updated.param_1; // date
+                                delete updated.param_0;
+                                delete updated.param_1;
+                            }
+                            return updated;
+                        });
+                    }
                 },
                 columns: [
                     {
-                        data: 'Symbol'
+                        data: 'Symbol',
+                        defaultContent: '--'
                     },
                     {
-                        data: 'param_0'
+                        data: 'param_0',
+                        defaultContent: '--'
                     },
                     {
-                        data: 'param_1'
+                        data: 'param_1',
+                        defaultContent: '--'
                     },
                     {
-                        data: 'param_2'
+                        data: 'param_2',
+                        defaultContent: '--'
                     },
                     {
-                        data: 'param_3'
+                        data: 'param_3',
+                        defaultContent: '--'
                     },
                     {
                         data: 'param_4',
-                        render: function (data, type) {
+                        defaultContent: '--',
+                        render: function (data) {
+                            if (!data) return '--';
                             return data.split(" ")[0]
                         }
                     },
@@ -368,26 +392,50 @@ $(document).ready(function () {
                     "url": root_1 + route_3 + '/10 DAY LOW BO?count=5',
                     "type": "GET",
                     "dataType": 'json',
+                    "dataSrc": function (response) {
+                        if (!response || !Array.isArray(response.data)) {
+                            return [];
+                        }
+                        return response.data.map(item => {
+                            let updated = { ...item };
+                            // CASE: old / incorrect format
+                            // param_0 = percentage, param_1 = date
+                            if (updated.param_0 !== undefined && updated.param_1 !== undefined && updated.param_2 === undefined && updated.param_4 === undefined) {
+                                updated.param_2 = updated.param_0; // percentage
+                                updated.param_4 = updated.param_1; // date
+                                delete updated.param_0;
+                                delete updated.param_1;
+                            }
+                            return updated;
+                        });
+                    }
                 },
                 columns: [
                     {
-                        data: 'Symbol'
+                        data: 'Symbol',
+                        defaultContent: '--'
                     },
                     {
-                        data: 'param_0'
+                        data: 'param_0',
+                        defaultContent: '--'
                     },
                     {
-                        data: 'param_1'
+                        data: 'param_1',
+                        defaultContent: '--'
                     },
                     {
-                        data: 'param_2'
+                        data: 'param_2',
+                        defaultContent: '--'
                     },
                     {
-                        data: 'param_3'
+                        data: 'param_3',
+                        defaultContent: '--'
                     },
                     {
                         data: 'param_4',
-                        render: function (data, type) {
+                        defaultContent: '--',
+                        render: function (data) {
+                            if (!data) return '--';
                             return data.split(" ")[0]
                         }
                     },
@@ -430,26 +478,50 @@ $(document).ready(function () {
                     "url": root_1 + route_3 + '/50 DAY HIGH BO?count=5',
                     "type": "GET",
                     "dataType": 'json',
+                    "dataSrc": function (response) {
+                        if (!response || !Array.isArray(response.data)) {
+                            return [];
+                        }
+                        return response.data.map(item => {
+                            let updated = { ...item };
+                            // CASE: old / incorrect format
+                            // param_0 = percentage, param_1 = date
+                            if (updated.param_0 !== undefined && updated.param_1 !== undefined && updated.param_2 === undefined && updated.param_4 === undefined) {
+                                updated.param_2 = updated.param_0; // percentage
+                                updated.param_4 = updated.param_1; // date
+                                delete updated.param_0;
+                                delete updated.param_1;
+                            }
+                            return updated;
+                        });
+                    }
                 },
                 columns: [
                     {
-                        data: 'Symbol'
+                        data: 'Symbol',
+                        defaultContent: '--'
                     },
                     {
-                        data: 'param_0'
+                        data: 'param_0',
+                        defaultContent: '--'
                     },
                     {
-                        data: 'param_1'
+                        data: 'param_1',
+                        defaultContent: '--'
                     },
                     {
-                        data: 'param_2'
+                        data: 'param_2',
+                        defaultContent: '--'
                     },
                     {
-                        data: 'param_3'
+                        data: 'param_3',
+                        defaultContent: '--'
                     },
                     {
                         data: 'param_4',
-                        render: function (data, type) {
+                        defaultContent: '--',
+                        render: function (data) {
+                            if (!data) return '--';
                             return data.split(" ")[0]
                         }
                     },
@@ -492,26 +564,50 @@ $(document).ready(function () {
                     "url": root_1 + route_3 + '/50 DAY LOW BO?count=5',
                     "type": "GET",
                     "dataType": 'json',
+                    "dataSrc": function (response) {
+                        if (!response || !Array.isArray(response.data)) {
+                            return [];
+                        }
+                        return response.data.map(item => {
+                            let updated = { ...item };
+                            // CASE: old / incorrect format
+                            // param_0 = percentage, param_1 = date
+                            if (updated.param_0 !== undefined && updated.param_1 !== undefined && updated.param_2 === undefined && updated.param_4 === undefined) {
+                                updated.param_2 = updated.param_0; // percentage
+                                updated.param_4 = updated.param_1; // date
+                                delete updated.param_0;
+                                delete updated.param_1;
+                            }
+                            return updated;
+                        });
+                    }
                 },
                 columns: [
                     {
-                        data: 'Symbol'
+                        data: 'Symbol',
+                        defaultContent: '--'
                     },
                     {
-                        data: 'param_0'
+                        data: 'param_0',
+                        defaultContent: '--'
                     },
                     {
-                        data: 'param_1'
+                        data: 'param_1',
+                        defaultContent: '--'
                     },
                     {
-                        data: 'param_2'
+                        data: 'param_2',
+                        defaultContent: '--'
                     },
                     {
-                        data: 'param_3'
+                        data: 'param_3',
+                        defaultContent: '--'
                     },
                     {
                         data: 'param_4',
-                        render: function (data, type) {
+                        defaultContent: '--',
+                        render: function (data) {
+                            if (!data) return '--';
                             return data.split(" ")[0]
                         }
                     },
