@@ -453,6 +453,54 @@ const toast_function = (state, message) => {
   }, 3000);
 }
 
+// -------------------PRODUCT CLOSURE NOTICE MODAL-----------------------
+
+const TRADEFINDER_LEMON_LINK = 'https://lemonn.co.in/affiliate-deeplink?data=4w0ir1';
+
+const create_product_closure_modal = () => {
+  if ($('#product_closure_modal').length) return;
+
+  var modalContainer =
+    '<div class="modal fade" tabindex="-1" id="product_closure_modal" aria-labelledby="productClosureModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="true">' +
+    '<div class="modal-dialog modal-dialog-centered modal-lg">' +
+    '<div class="modal-content bg-color border-0">' +
+    '<div class="modal-header border-bottom-0">' +
+    '<h5 class="modal-title text-warning" id="productClosureModalLabel">' +
+    '🎁 Tredcode is getting old and many features are not working in this new market</h5>' +
+    '<button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>' +
+    '</div>' +
+    '<div class="modal-body bg-faint text-light">' +
+    '<p class="mb-2">We\'re retiring Tredcode to save everyone from the outdated version, and upgrading all users to <strong class="text-warning">TradeFinder,</strong> completely free.</p>' +
+    '<p class="mb-2">Follow the simple steps below to continue enjoying all premium benefits at no additional cost.</p>' +
+    '<ul class="list-unstyled mb-3">' +
+    '<li class="mb-1">✅ Join <strong>Lemonn</strong> through the invitation link below</li>' +
+    '<li class="mb-1">✅ Perform any F&amp;O order of your choice</li>' +
+    '<li class="mb-1">✅ Submit your account details for review on WhatsApp +91 7977878134</li>' +
+    '<li class="mb-1">✅ Our support team will validate the activity</li>' +
+    '<li class="mb-2">✅ Receive exclusive <strong>TradeFinder</strong> access after confirmation</li>' +
+    '</ul>' +
+    '<p class="mb-2">Our Account Opening Link &rarr; <a href="' + TRADEFINDER_LEMON_LINK + '" target="_blank" rel="noopener noreferrer" class="text-warning fw-bold">Click here</a></p>' +
+    '<p class="mb-0 opacity-75">Thank you for being a valued member of our trading community.</p>' +
+    '</div>' +
+    '</div>' +
+    '</div>' +
+    '</div>';
+
+  if ($('footer').length) {
+    $('footer').before(modalContainer);
+  } else {
+    $('body').append(modalContainer);
+  }
+};
+
+const show_product_closure_modal = () => {
+  setTimeout(function () {
+    var modalEl = document.getElementById('product_closure_modal');
+    if (!modalEl || typeof bootstrap === 'undefined') return;
+    bootstrap.Modal.getOrCreateInstance(modalEl).show();
+  }, 2000);
+};
+
 // Adding Modal using jquery
 const create_modal = () => {
   var modalContainer = '<div class="modal" tabindex="-1" id="chat_image_modal">' +
@@ -562,6 +610,9 @@ $(document).ready(function () {
   create_toast()
 
   create_modal()
+
+  create_product_closure_modal()
+  show_product_closure_modal()
 
   // -------- For Alerts
   const toastElList = document.querySelectorAll('#toast-alert')
