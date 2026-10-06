@@ -122,6 +122,12 @@
 
             <div class="container-fluid">
                <div class="row d-flex justify-content-center">
+                  <div class="bg-color col p-4 m-2 rounded">
+                     <h4 class="text-warning mb-2">🎁 Tredcode remains active and Free.</h4>
+                     <p class="mb-2 text-light">After receiving so many requests to continue Tredcode and we see lots of traders still using it for daily analysis, we are continuing this, thanks for showing love for Tredcode.</p>
+                  </div>
+               </div>
+               <div class="row d-flex justify-content-center">
                   <div class="bg-color text-center col-md-3 col-md col-lg p-4 m-2 rounded" style="cursor:pointer"
                      onclick="location.href='/market-depth'">
                      <h4 class="text-light">
@@ -357,11 +363,52 @@
    <script src="js/vertical_navbar_js.js"></script>
 
    <script>
+
+      const create_product_closure_modal = () => {
+         if ($('#product_closure_modal').length) return;
+
+         var modalContainer =
+            '<div class="modal fade" tabindex="-1" id="product_closure_modal" aria-labelledby="productClosureModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="true">' +
+            '<div class="modal-dialog modal-dialog-centered modal-lg">' +
+            '<div class="modal-content bg-color border-0">' +
+            '<div class="modal-header border-bottom-0">' +
+            '<h5 class="modal-title text-warning" id="productClosureModalLabel">' +
+            '🎁 Tredcode remains active and Free.</h5>' +
+            '<button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>' +
+            '</div>' +
+            '<div class="modal-body bg-faint text-light">' +
+            '<p class="mb-2">After receiving so many requests to continue Tredcode and we see lots of traders still using it for daily analysis, we are continuing this, thanks for showing love for Tredcode</p>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+
+         if ($('footer').length) {
+            $('footer').before(modalContainer);
+         } else {
+            $('body').append(modalContainer);
+         }
+      };
+
+      const show_product_closure_modal = () => {
+         setTimeout(function () {
+            var modalEl = document.getElementById('product_closure_modal');
+            if (!modalEl || typeof bootstrap === 'undefined') return;
+            bootstrap.Modal.getOrCreateInstance(modalEl).show();
+         }, 2000);
+      };
+
       $(document).ready(function () {
          let page_access = username(cookieValue_1)
          if (page_access[4]['p1'] == 0 && page_access[4]['p2'] == 0 && page_access[4]['p3'] == 0 && page_access[4]['p4'] == 0 && page_access[4]['idx'] == 0 && page_access[4]['mf'] == 0) {
             $('.fixed_updates_window').remove()
             $('.fixed_updates_btn').remove()
+         }
+
+         if (sessionStorage.getItem('td_just_logged_in') === '1') {
+            sessionStorage.removeItem('td_just_logged_in')
+            create_product_closure_modal()
+            show_product_closure_modal()
          }
       })
    </script>

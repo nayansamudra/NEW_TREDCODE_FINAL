@@ -70,6 +70,7 @@
             $.post(api_url + "/auth", { g_token: cred }, function (data, status) {
                 console.log("Data: " + data + "\nStatus: " + status);
                 if (data == "success") {
+                    sessionStorage.setItem('td_just_logged_in', '1');
                     window.location.replace("/home");
                 }
 
